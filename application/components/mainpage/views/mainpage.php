@@ -37,6 +37,6 @@ class View_mainpage_mainpage extends \Brilliant\mvc\BView{
 
 		//no html for mainpage!
 		$this->setcache(true,3600);//Cache for 1 hour
-		return '';
+		return $this->template_load();
 		}
 	}
