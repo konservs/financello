@@ -10,13 +10,12 @@
  * @copyright © Andrii Biriev, <a@konservs.com>
  */
 namespace Application;
-use Brilliant\BSingleton;
 use Brilliant\cms\BLang;
 use Brilliant\cms\BRouterBase;
 use Brilliant\log\BLog;
 
 class BRouter extends BRouterBase{
-	use BSingleton;
+	use \Brilliant\BSingleton;
 	protected static $starttime=0;
 	protected static $instance=NULL;
 	protected $components=array('content','users');
@@ -605,15 +604,13 @@ class BRouter extends BRouterBase{
 			}
 		//
 		if($exploded_host[0]=='admin'){
-			bimport('cms.language');
 			BLang::init('ru','admin');// adminlagugages
 			return $this->parse_adminurl($f_path);
 			}
 		//
 		$this->langcode='en';
 		$lang=$this->langcode;
-		//bimport('cms.language');
-		//BLang::init($this->langcode);
+		BLang::init($this->langcode);
 
 		if($f_path[0]=='switchmobile'){
 			$this->maincom=(object)array(

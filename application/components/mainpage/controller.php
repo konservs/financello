@@ -4,10 +4,9 @@
 //
 // Author: Andrii Biriev
 //============================================================
-defined('BEXEC') or die;
-bimport('mvc.component');
+defined('BEXEC') or die('No direct access!');
 
-class Controller_mainpage extends BController{
+class Controller_mainpage extends \Brilliant\mvc\BController{
 	//====================================================
 	//
 	//====================================================

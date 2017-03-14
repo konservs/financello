@@ -6,7 +6,7 @@ class View_mainpage_mainpage extends \Brilliant\mvc\BView{
 	/**
 	 *
 	 */
-	public function generate($data){
+	public function generate($data = NULL){
 		$lang=BLang::$langcode;
 		//Set headers
 		if($lang=='ua'){
