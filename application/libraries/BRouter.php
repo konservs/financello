@@ -630,13 +630,13 @@ class BRouter extends BRouterBase{
 			}
 		elseif(count($f_path)==0||(count($f_path)==1&&$f_path[0]=='')){
 			$this->maincom=(object)array(
-				'com'=>'content',
+				'com'=>'mainpage',
 				'position'=>'content',
-				'segments'=>array('view'=>'category','id'=>1)
+				'segments'=>array('view'=>'mainpage')
 				);
 			$this->addfixedrules();
 			$this->rules[]=$this->maincom;
-			$this->softmodulesget('content:category:1');
+			$this->softmodulesget('mainpage:mainpage');
 			return true;
 			}
 		return false;
