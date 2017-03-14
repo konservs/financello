@@ -5,7 +5,7 @@
  * @author Andrii Biriev
  */
 defined('BEXEC')or die('No direct access!');
-
+use \Brilliant\cms\BLang;
 ?>
 <div id="users_login">
 	<div class="container">

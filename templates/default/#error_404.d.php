@@ -5,6 +5,7 @@
  * @author Andrii Biriev
  */
 defined('BEXEC')or die('No direct access!');
+use Brilliant\cms\BLang;
 ?><!DOCTYPE html>
 <html>
 <head>

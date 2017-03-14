@@ -13,6 +13,7 @@ namespace Application;
 use Brilliant\cms\BLang;
 use Brilliant\cms\BRouterBase;
 use Brilliant\log\BLog;
+use Brilliant\users\BUsers;
 
 class BRouter extends BRouterBase{
 	use \Brilliant\BSingleton;
@@ -34,7 +35,6 @@ class BRouter extends BRouterBase{
 	 * @return \BUser|NULL Logged user
 	 */
 	public function getLoggedUser(){
-		bimport('users.general');
 		$busers=BUsers::getInstance();
 		return $busers->getLoggedUser();
 		}
@@ -42,19 +42,12 @@ class BRouter extends BRouterBase{
 	 * Add some fixed rules - languages switch, etc.
 	 */
 	public function addfixedrules(){
-		/*bimport('users.session');
-		$session=BUsersSession::getInstanceAndStart();
-		if(!empty($session)){
-			bimport('users.general');
-			$uid=$session->userid;
-			}else{	
-			$uid=NULL;
-			}
-		if(!empty($uid)){
+		$user = $this->getLoggedUser();
+		if(!empty($user)){
 			$this->rules[]=(object)array(
 				'com' => 'users',
 				'position' => 'userpanel',
-				'segments' => array('view'=>'userpanel','uid'=>$uid),
+				'segments' => array('view'=>'userpanel','uid'=>$user->id),
 				);
 			}else{
 			$this->rules[]=(object)array(
@@ -62,7 +55,7 @@ class BRouter extends BRouterBase{
 				'position' => 'userpanel',
 				'segments' => array('view'=>'userpanel'),
 				);
-			}*/
+			}
 		}
 	/**
 	 *
@@ -77,7 +70,7 @@ class BRouter extends BRouterBase{
 	/**
 	 *
 	 */
-	public function generate_contenturl($lang,$segments){
+	public function generateUrlContent($lang,$segments){
 		$url_content=$this->getmainurl($lang).'content/';
 		$view=isset($segments['view'])?$segments['view']:'';
 		switch($view){
@@ -95,7 +88,7 @@ class BRouter extends BRouterBase{
 					BLog::addtolog('[Router]: The article category is empty!',LL_ERROR);
 					return '';
 					}
-				$url=$this->generate_contenturl($lang,array('view'=>'blog','category'=>$article->category));
+				$url=$this->generateUrlContent($lang,array('view'=>'blog','category'=>$article->category));
 				$url.=$article->getalias($lang).'-'.$article->id;
 				return $url;
 			case 'blog':
@@ -124,6 +117,22 @@ class BRouter extends BRouterBase{
 		return '';
 		}
 	/**
+	 * Generate url for Users component
+	 *
+	 * @param $lang
+	 * @param $segments
+	 * @return string
+	 */
+	public function generateUrlUsers($lang, $segments){
+		$URL_users=$this->getmainurl($lang).'users/';
+		$view=isset($segments['view'])?$segments['view']:'';
+		if(($view=='logout')||($view=='login')||($view=='register')) {
+			return $URL_users.$view;
+			}
+
+		return '';
+		}
+	/**
 	 * Generate URL by component, language and segments
 	 * in case of sucessfull parse return URL, else return false;
 	 *
@@ -142,7 +151,9 @@ class BRouter extends BRouterBase{
 		
 		switch($component){
 			case 'content':
-				return $this->generate_contenturl($lang,$segments);
+				return $this->generateUrlContent($lang,$segments);
+			case 'users':
+				return $this->generateUrlUsers($lang,$segments);
 			case 'mainpage':
 				return $this->getmainurl($lang);
 			}
@@ -166,7 +177,7 @@ class BRouter extends BRouterBase{
 	 * 
 	 * Language - $this->langcode
 	 */
-	public function parseurl_content($f_path){
+	public function parseUrlContent($f_path){
 		if(ROUTER_DEBUG){
 			BLog::addtolog('[Router]: We are in content branch now!');
 			}
@@ -435,70 +446,19 @@ class BRouter extends BRouterBase{
 		return true;
 		}
 	/**
-	 * Parse /social/ branch.
-	 * 
-	 * Language - $this->langcode
-	 */
-	public function parseurl_social($f_path){
-		BLog::addtolog('[Router]: We are in social branch now!');
-		//Unset the latest empty "/" in url.
-		if((count($f_path))&&(empty($f_path[count($f_path)-1]))){
-			BLog::addtolog('[Router]: parseurl_social() removing latest "/" character.');
-			unset($f_path[count($f_path)-1]);
-			}
-		//
-		if((count($f_path)==2)&&($f_path[0]=='auth')){
-			$sn=$f_path[1];//Social Network
-			$this->maincom=(object)array(
-				'com'=>'social',
-				'position'=>'content',
-				'segments'=>array('view'=>'auth','network'=>$sn),
-				);
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//
-		if((count($f_path)==2)&&($f_path[0]=='complete')){
-			$sn=$f_path[1];//Social Network
-			$this->maincom=(object)array(
-				'com'=>'social',
-				'position'=>'content',
-				'segments'=>array('view'=>'complete','network'=>$sn),
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//
-		if((count($f_path)==1)&&($f_path[0]=='privacy-policy')){
-			$sn=$f_path[1];//Social Network
-			$this->maincom=(object)array(
-				'com'=>'social',
-				'position'=>'content',
-				'segments'=>array('view'=>'ppolicy'),
-				);
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-
-		BLog::addtolog('[Router]: parseurl_social() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
-		return false;
-		}
-	/**
 	 * Parse /users/ branch.
 	 * 
 	 * Language - $this->langcode
 	 */
-	public function parseurl_users($f_path){
+	public function parseUrlUsers($f_path){
 		BLog::addtolog('[Router]: We are in users branch now!');
 		//Unset the latest empty "/" in url.
 		if((count($f_path))&&(empty($f_path[count($f_path)-1]))){
-			BLog::addtolog('[Router]: parseurl_users() removing latest "/" character.');
+			BLog::addtolog('[Router]: parseUrlUsers() removing latest "/" character.');
 			unset($f_path[count($f_path)-1]);
 			}
 		//
-		if((count($f_path)==1)&&(($f_path[0]=='login')||($f_path[0]=='logout'))){
-			$sn=$f_path[1];//users Network
+		if((count($f_path)==1)&&(($f_path[0]=='login')||($f_path[0]=='logout')||($f_path[0]=='register'))){
 			$this->maincom=(object)array(
 				'com'=>'users',
 				'position'=>'content',
@@ -507,79 +467,7 @@ class BRouter extends BRouterBase{
 			$this->rules[]=$this->maincom;
 			return true;
 			}
-		BLog::addtolog('[Router]: parseurl_users() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
-		return false;
-		}
-	/**
-	 * Parse /other/ branch.
-	 *
-	 * Language - $this->langcode
-	 */
-	public function parseurl_other($f_path){
-		BLog::addtolog('[Router]: We are in other branch now!');
-		if((count($f_path))&&(empty($f_path[count($f_path)-1]))){
-			BLog::addtolog('[Router]: parseurl_other() removing latest "/" character.');
-			unset($f_path[count($f_path)-1]);
-			}
-		//
-		if((count($f_path)==1)&&($f_path[0]=='submitnews.json')){
-			$this->maincom=(object)array(
-				'com'=>'other',
-				'position'=>'content',
-				'segments'=>array('view'=>'submitnews'),
-				);
-			$this->ctype=CTYPE_JSON;
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//
-		if((count($f_path)==1)&&($f_path[0]=='submitads.json')){
-			$this->maincom=(object)array(
-				'com'=>'other',
-				'position'=>'content',
-				'segments'=>array('view'=>'submitads'),
-				);
-			$this->ctype=CTYPE_JSON;
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//
-		if((count($f_path)==1)&&($f_path[0]=='addticket.json')){
-			$this->maincom=(object)array(
-				'com'=>'other',
-				'position'=>'content',
-				'segments'=>array('view'=>'addticket'),
-				);
-			$this->ctype=CTYPE_JSON;
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//
-		if((count($f_path)==1)&&($f_path[0]=='contacts')){
-			$this->maincom=(object)array(
-				'com'=>'other',
-				'position'=>'content',
-				'segments'=>array('view'=>'contacts'),
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			//$this->softmodulesget('blogs:authors');
-			$this->softmodulesget('other:home');
-			return true;
-			}
-		//
-		if(empty($f_path)){
-			$this->maincom=(object)array(
-				'com'=>'other',
-				'position'=>'content',
-				'segments'=>array('view'=>'home'),
-			);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			$this->softmodulesget('other:home');
-			return true;
-			}
-		BLog::addtolog('[Router]: parseurl_other() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
+		BLog::addtolog('[Router]: parseUrlUsers() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
 		return false;
 		}
 	/**
@@ -611,7 +499,7 @@ class BRouter extends BRouterBase{
 		$this->langcode='en';
 		$lang=$this->langcode;
 		BLang::init($this->langcode);
-
+		//
 		if($f_path[0]=='switchmobile'){
 			$this->maincom=(object)array(
 				'com'=>'switchmobileversion',
@@ -623,8 +511,13 @@ class BRouter extends BRouterBase{
 			}
 		elseif($f_path[0]=='content'){
 			array_shift($f_path);
-			return $this->parseurl_content($f_path);
+			return $this->parseUrlContent($f_path);
 			}
+		elseif($f_path[0]=='users'){
+			array_shift($f_path);
+			return $this->parseUrlUsers($f_path);
+			}
+
 		elseif(count($f_path)==0||(count($f_path)==1&&$f_path[0]=='')){
 			$this->maincom=(object)array(
 				'com'=>'mainpage',
