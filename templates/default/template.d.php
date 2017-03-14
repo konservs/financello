@@ -25,15 +25,9 @@ if((defined('DEBUG_SITENOINDEX'))&&(DEBUG_SITENOINDEX)){
 $bhtml->use_framework('jquery');
 $bhtml->add_css('//'.BHOSTNAME_STATIC.'/css/main.css?v=1.5.4');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
-
-$col_left=($this->countcomponents('leftcolumn')>0);
-$col_right=($this->countcomponents('rightcolumn')>0);
-$clspref='';
-if($col_left)
-	$clspref.='l';
-if($col_right)
-	$clspref.='r';
-$clspref.='c-';
+$bhtml->add_meta('','IE=edge','X-UA-Compatible');
+$bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');
+$bhtml->use_framework('bootstrap');
 ?><!DOCTYPE html>
 <html<?php echo($printversion?' class="printversion"':''); ?>>
 	<head>
@@ -46,70 +40,53 @@ $clspref.='c-';
 	</head>
 <body lang="<?php echo(BLang::$langcode_web) ?>" itemscope itemtype="http://schema.org/WebPage">
 <div id="footer-pusher">
-	<div id="before-head">
-		<div class="wrapper">
-			<div class="lang">{{position:headlang}}</div>
-			<div class="vers">{{position:switchversion}}</div>
-			<div class="user">{{position:userpanel}}</div>
-			{{position:headmenu}}
-			<div class="clear"></div>
-		</div>
-	</div>
-	<div id="head">
-		<div id="headw" class="wrapperx">
-			<a class="logo" href="<?php echo $url_main; ?>">HOME</a>
-			<div class="clear"></div>
-		</div>
-	</div>
-	<div id="menusbar">
-	<?php if($this->countcomponents('mainmenu')>0): ?>
-		<div class="redmenu">
-			<div class="wrapper wrapperx">
-				<div class="wrapper redwrapper">
-					<div class="redmenuinner">{{position:mainmenu}}</div>
-					<div class="redmenusearch">{{position:newssearch}}</div>
-					<div class="redmenubutton">{{position:addbutton}}</div>
+	<div id="footer-pusher">
+	        <!-- TOP navigation bar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand navbar-brand-logo" href="/"><?php echo Blang::_("SITE_FINANCELLO"); ?></a>
 				</div>
+
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul>
+						</li>
+					</ul>
+					{{position:userpanel}}
+				</div><!--/.nav-collapse -->
 			</div>
-		</div>
-	<?php endif; ?>
+		</nav>
+
+		<div id="content">{{position:content}}</div>
+
+		<div class="push"></div>
 	</div>
 
-<div class="wrapperx" id="mainwrapper">
-{{position:beforeall}}
-<div id="position-breadcrumbs">
-{{position:beforebreadcrumbs}}
-<?php BBreadcrumbsGeneral::staticdraw(); ?>
-<div class="clear"></div>
-</div>
-<?php
-if($col_left){
-	echo('<div class="leftcolumn '.$clspref.'leftcolumn">{{position:leftcolumn}}</div>');
-	}
-?>
-<div class="content <?php echo($clspref); ?>content">
-	{{position:beforecontent}}
-	{{position:content}}
-	{{position:aftercontent}}
-</div>
-<?php
-if($col_right){
-	echo('<div class="rightcolumn '.$clspref.'rightcolumn">{{position:rightcolumn}}</div>');
-	}
-?>
-<a href="#top" id="gotop" class="pg pg-gotop"></a>
-<div style="clear:both"></div>
-{{position:afterall}}
-</div>
-<div class="push"></div>
-</div>
-
-<div id="footer">
-	<?php $now = new DateTime(); ?>
-	<a class="logo" href="<?php echo $url_main; ?>">
-		<span class="copy">©&nbsp;2003&nbsp;&ndash; <?php echo $now->format("Y"); ?></span>
-	</a>
-</div>
-<?php echo $bhtml->afterbody; ?>
+	<footer id="footer">
+		<div class="container">
+			<hr>
+			<a class="logo" href="<?php echo $url_main; ?>"><span><?php echo Blang::_("SITE_FINANCELLO"); ?></span></a>
+    		</div> <!-- /container -->
+	</footer>
+	<?php echo $bhtml->afterbody; ?>
 </body></html>
-

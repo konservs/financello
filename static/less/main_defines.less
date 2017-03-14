@@ -1,0 +1,55 @@
+/**
+ * Всякие заготовки
+ */
+.transition (@property: all, @duration: 0.25s, @function:ease-in-out, @delay:0s){
+	-webkit-transition: @arguments;
+	-moz-transition: @arguments;
+	-o-transition: @arguments;
+	transition: @arguments;
+	}
+.border-radius (@radius: 2px){ 
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+	}
+.box-sizing(@type: content-box){
+	box-sizing: @type;
+	-ms-box-sizing: @type;
+	-moz-box-sizing: @type;
+	-webkit-box-sizing: @type; 
+	}
+.gradient-vertical(@color1,@color2){
+	background-color: @color1;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(@color1), to(@color2));
+	background-image: -webkit-linear-gradient(top, @color1, @color2);
+	background-image: -moz-linear-gradient(top, @color1, @color2);
+	background-image: -ms-linear-gradient(top, @color1, @color2);
+	background-image: -o-linear-gradient(top, @color1, @color2);
+	background-image: linear-gradient(to bottom, @color1, @color2);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=@color1, endColorstr=@color2);
+	}
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @border, @color: #000) {
+	box-shadow: @arguments;
+	-moz-box-shadow: @arguments;
+	-webkit-box-shadow: @arguments;
+	}
+
+.rotate(@angle){
+	transform-origin: center center;
+	-webkit-transform-origin: center center;
+	-moz-transform-origin: center center;
+	-ms-transform-origin: center center;
+	-o-transform-origin: center center;
+	transform: rotate(@angle);
+	-webkit-transform: rotate(@angle);
+	-ms-transform: rotate(@angle);
+	}
+
+@sprites: url('sprites.png') no-repeat;
+.sprites(@x,@y){
+	background-image: url('sprites.png');
+	background-repeat: no-repeat;
+	background-position: @x @y;
+	}
