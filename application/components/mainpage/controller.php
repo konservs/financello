@@ -3,7 +3,6 @@
 // Component to work with main page
 //
 // Author: Andrii Biriev
-// Copyright © Brilliant IT corporation, www.it.brilliant.ua
 //============================================================
 defined('BEXEC') or die;
 bimport('mvc.component');

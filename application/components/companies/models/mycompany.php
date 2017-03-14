@@ -3,7 +3,6 @@
  * Model of MyCompany dashboard page.
  *
  * @author Andrii Biriev
- * @copyright ©2014 Brilliant IT corporation, www.it.brilliant.ua
  */
 defined('BEXEC') or die('No direct access!');
 
