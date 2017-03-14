@@ -15,10 +15,9 @@ $printversion=BRequest::GetInt('printversion');
 $bhtml=BHTML::getInstance();
 $bhtml->add_meta('viewport','width=device-width, initial-scale=0.35, maximum-scale=1, user-scalable=yes');
 $brouter=BRouter::getInstance();
-if((defined('GOOGLE_ANALYTICS_ID'))&&(GOOGLE_ANALYTICS_ID!='')){
-	bimport('google.analytics');
-	BGoogleAnalytics::Initialize(GOOGLE_ANALYTICS_ID);
-	}
+//if((defined('GOOGLE_ANALYTICS_ID'))&&(GOOGLE_ANALYTICS_ID!='')){
+//	BGoogleAnalytics::Initialize(GOOGLE_ANALYTICS_ID);
+//	}
 if((defined('DEBUG_SITENOINDEX'))&&(DEBUG_SITENOINDEX)){
 	$bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
 	}

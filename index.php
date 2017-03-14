@@ -11,6 +11,10 @@ define('BEXEC', 1);
 define('BROOTPATH', realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 define('BLIBRARIESPATH', BROOTPATH.'libraries'.DIRECTORY_SEPARATOR);
 define('BTEMPLATESPATH', BROOTPATH.'templates'.DIRECTORY_SEPARATOR);
+define('BLANGUAGESPATH', BROOTPATH.'languages'.DIRECTORY_SEPARATOR);
+//Load configuration file
+include(BROOTPATH.'config'.DIRECTORY_SEPARATOR.'config.php');
+//Initialize router
 $loader=require(BROOTPATH.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 //
 use Application\BRouter;
