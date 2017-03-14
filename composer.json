@@ -2,7 +2,7 @@
 	"autoload": {
 		"psr-4": {
 			"Brilliant\\": "framework/libraries/",
-			"Application\\": "application/"
+			"Application\\": "application/libraries/"
 			}
 		}
 	}
