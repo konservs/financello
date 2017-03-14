@@ -10,11 +10,13 @@
  * @copyright © Andrii Biriev, <a@konservs.com>
  */
 namespace Application;
+use Brilliant\BSingleton;
 use Brilliant\cms\BLang;
 use Brilliant\cms\BRouterBase;
 use Brilliant\log\BLog;
 
 class BRouter extends BRouterBase{
+	use BSingleton;
 	protected static $starttime=0;
 	protected static $instance=NULL;
 	protected $components=array('content','users');
