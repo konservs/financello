@@ -465,6 +465,7 @@ class BRouter extends BRouterBase{
 				'segments'=>array('view'=>$f_path[0]),
 				);
 			$this->rules[]=$this->maincom;
+			$this->addFixedRules();
 			return true;
 			}
 		BLog::addtolog('[Router]: parseUrlUsers() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
@@ -496,7 +497,13 @@ class BRouter extends BRouterBase{
 			return $this->parse_adminurl($f_path);
 			}
 		//
-		$this->langcode='en';
+		//Detect language
+		if(($f_path[0]==='ru')||($f_path[0]==='ua')){
+			$this->langcode=$f_path[0];
+			array_shift($f_path);
+			}else{
+			$this->langcode='en';
+			}
 		$lang=$this->langcode;
 		BLang::init($this->langcode);
 		//
