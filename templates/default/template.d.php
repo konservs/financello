@@ -27,6 +27,24 @@ $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');
 $bhtml->use_framework('bootstrap');
+//
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'56x56','href'=>URL_STATIC.'favicon/apple-icon-57x57.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'60x60','href'=>URL_STATIC.'favicon/apple-icon-60x60.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'72x72','href'=>URL_STATIC.'favicon/apple-icon-72x72.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'76x76','href'=>URL_STATIC.'favicon/apple-icon-76x76.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'114x114','href'=>URL_STATIC.'favicon/apple-icon-114x114.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'120x120','href'=>URL_STATIC.'favicon/apple-icon-120x120.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'144x144','href'=>URL_STATIC.'favicon/apple-icon-144x144.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'152x152','href'=>URL_STATIC.'favicon/apple-icon-152x152.png'));
+$bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'180x180','href'=>URL_STATIC.'favicon/apple-icon-180x180.png'));
+$bhtml->add_link(array('rel'=>'icon','type'=>'image/png','sizes'=>'192x192','href'=>URL_STATIC.'favicon/android-icon-192x192.png'));
+$bhtml->add_link(array('rel'=>'icon','type'=>'image/png','sizes'=>'32x32','href'=>URL_STATIC.'favicon/favicon-32x32.png'));
+$bhtml->add_link(array('rel'=>'icon','type'=>'image/png','sizes'=>'96x96','href'=>URL_STATIC.'favicon/favicon-96x96.png'));
+$bhtml->add_link(array('rel'=>'icon','type'=>'image/png','sizes'=>'16x16','href'=>URL_STATIC.'favicon/favicon-16x16.png'));
+$bhtml->add_link(array('rel'=>'manifest','href'=>URL_STATIC.'favicon/manifest.json'));
+$bhtml->add_meta('msapplication-TileColor','#ffffff');
+$bhtml->add_meta('msapplication-TileImage',URL_STATIC.'favicon/ms-icon-144x144.png');
+$bhtml->add_meta('theme-color','#ffffff');
 ?><!DOCTYPE html>
 <html<?php echo($printversion?' class="printversion"':''); ?>>
 	<head>
@@ -39,9 +57,8 @@ $bhtml->use_framework('bootstrap');
 	</head>
 <body lang="<?php echo(BLang::$langcode_web) ?>" itemscope itemtype="http://schema.org/WebPage">
 <div id="footer-pusher">
-	<div id="footer-pusher">
-	        <!-- TOP navigation bar -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+	<!-- TOP navigation bar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -76,16 +93,16 @@ $bhtml->use_framework('bootstrap');
 			</div>
 		</nav>
 
-		<div id="content">{{position:content}}</div>
+	<div id="content">{{position:content}}</div>
 
-		<div class="push"></div>
-	</div>
+	<div class="push"></div>
+</div>
 
-	<footer id="footer">
-		<div class="container">
-			<hr>
-			<a class="logo" href="<?php echo $url_main; ?>"><span><?php echo Blang::_("SITE_FINANCELLO"); ?></span></a>
-    		</div> <!-- /container -->
-	</footer>
-	<?php echo $bhtml->afterbody; ?>
+<footer id="footer">
+	<div class="container">
+		<hr>
+		<a class="logo" href="<?php echo $url_main; ?>"><span><?php echo Blang::_("SITE_FINANCELLO"); ?></span></a>
+    	</div> <!-- /container -->
+</footer>
+<?php echo $bhtml->afterbody; ?>
 </body></html>

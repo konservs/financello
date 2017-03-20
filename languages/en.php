@@ -34,4 +34,8 @@ self::$strings=array(
 	'FINCURRENCY_UAH_NAME'=>'Ukrainian Hryvna',
 	'FINCURRENCY_RUR_NAME'=>'Russian Rouble',
 	'FINCURRENCY_RUB_NAME'=>'Russian Rouble',
+
+
+	'COM_MAINPAGE_TITLE'=>'Financello – finance management application',
+
 	);
