@@ -60,18 +60,8 @@ class BRouter extends BRouterBase{
 	/**
 	 *
 	 */
-	public function getmainurl($lang){
-		$URL_main=BHOSTNAME.'/';
-		if($lang!=$this->deflang){
-			$URL_main.=$lang.'/';
-			}
-		return $URL_main;
-		}
-	/**
-	 *
-	 */
 	public function generateUrlContent($lang,$segments){
-		$url_content=$this->getmainurl($lang).'content/';
+		$url_content='content/';
 		$view=isset($segments['view'])?$segments['view']:'';
 		switch($view){
 			case 'article':
@@ -124,13 +114,55 @@ class BRouter extends BRouterBase{
 	 * @return string
 	 */
 	public function generateUrlUsers($lang, $segments){
-		$URL_users=$this->getmainurl($lang).'users/';
+		$URL_users='users/';
 		$view=isset($segments['view'])?$segments['view']:'';
 		if(($view=='logout')||($view=='login')||($view=='register')) {
 			return $URL_users.$view;
 			}
-
+		//Control panel
+		if($view=='dashboard'){
+			return 'members/';
+			}
 		return '';
+		}
+	/**
+	 * Generate URL for company finances.
+	 */
+	public function generateUrlFinances($lang, $segments){
+		$view=isset($segments['view'])?$segments['view']:'';
+		$company=isset($segments['company'])?$segments['company']:'';
+		//Operations groups
+		if($view=='opgroups'){
+			return 'members/mycompany-'.$company.'/opgroups/';
+			}
+		//
+		if($view=='opgroupadd'){
+			return 'members/mycompany-'.$company.'/opgroups/add';
+			}
+		//Operations group
+		if($view=='opgroup'){
+			if(empty($segments['id'])){
+				return '';
+				}
+			$id=(int)$segments['id'];
+			return 'members/mycompany-'.$company.'/opgroups/'.$id;
+			}
+		return false;
+		}
+	/**
+	 *
+	 */
+	public function generateUrlCompanies($lang, $segments){
+		$view=isset($segments['view'])?$segments['view']:'';
+		//Operations groups
+		if($view=='mycompany'){
+			if(empty($segments['id'])){
+				return '';
+				}
+			$id=(int)$segments['id'];
+			return 'members/mycompany-'.$id.'/';
+			}
+		return false;
 		}
 	/**
 	 * Generate URL by component, language and segments
@@ -140,22 +172,31 @@ class BRouter extends BRouterBase{
 	 * @param string $lang
 	 * @param array $segments
 	 */
-	public function generateURL($component,$lang,$segments){
-		if(ROUTER_DEBUG){
-			BLog::addtolog('[Router]: generating URL...');
-			BLog::addtolog('[Router]: $component='.$component);
-			BLog::addtolog('[Router]: $lang='.$lang);
-			BLog::addtolog('[Router]: $segments='.var_export($segments,true));
+	public function generateURL($component,$segments,$options=array()){
+		$opt_protocol=isset($options['protocol'])?$options['protocol']:'//';
+		$opt_hostname=isset($options['usehostname'])?$options['usehostname']:false;
+		//forming preffix
+		$pref='';
+		if($opt_hostname){
+			$pref=$opt_protocol.BHOSTNAME;
 			}
-		$URL='';
+		$pref.='/';
+		$lang=isset($segments['lang'])?$segments['lang']:'';
+		if(($lang!=='en')&&(!empty($lang))){
+			$pref.=$lang.'/';
+			}
 		
 		switch($component){
 			case 'content':
-				return $this->generateUrlContent($lang,$segments);
+				return $pref.$this->generateUrlContent($lang,$segments);
 			case 'users':
-				return $this->generateUrlUsers($lang,$segments);
+				return $pref.$this->generateUrlUsers($lang,$segments);
+			case 'companies':
+				return $pref.$this->generateUrlCompanies($lang,$segments);
+			case 'finances':
+				return $pref.$this->generateUrlFinances($lang,$segments);
 			case 'mainpage':
-				return $this->getmainurl($lang);
+				return $pref.'';
 			}
 		}
 	/**
@@ -171,279 +212,6 @@ class BRouter extends BRouterBase{
 			$url.=BRequest::getGetString();
 			}
 		return $url;
-		}
-	/**
-	 * Parse /content/ branch.
-	 * 
-	 * Language - $this->langcode
-	 */
-	public function parseUrlContent($f_path){
-		if(ROUTER_DEBUG){
-			BLog::addtolog('[Router]: We are in content branch now!');
-			}
-		//Remove lateset empty chain.
-		if(end($f_path)==''){
-			array_pop($f_path);
-			}
-		//
-		$segments=array();
-		//Get page.
-		if(substr(end($f_path),0,4)=='page'){
-			$num=substr(end($f_path),4);
-			if(is_numeric($num)){
-				$segments['page']=(int)$num;
-				array_pop($f_path);
-				}
-			}
-		//content - homepage
-		if(empty($f_path)){
-			$segments['view']='blog';
-			$segments['category']=1;
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			$this->softmodulesget('content:category:1');
-			return true;
-			}
-		if((count($f_path)==1)&&($f_path[0]=='archive')){
-			$segments['view']='archives';
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-			);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			//$this->softmodulesget('blogs:authors');
-			$this->softmodulesget('content:home');
-			return true;
-			}
-		//
-		if((count($f_path)==2)&&($f_path[0]=='archive')&&(substr($f_path[1],0,5)=='year-')){
-			$year=(int)substr($f_path[1],5);
-			if(empty($year)){
-				return false;
-				}
-			$segments['view']='archives';
-			$segments['year']=$year;
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			$this->softmodulesget('content:archive');
-			return true;
-			}
-		//
-		if((count($f_path)==2)&&($f_path[0]=='archive')&&(substr($f_path[1],0,5)=='date-')){
-			//NOW datetime and URL
-			$now=new DateTime();
-			$nyear=(int)$now->format('Y');
-			$nmonth=(int)$now->format('m');
-			$nday=(int)$now->format('d');
-			$url_dtnow=$this->generateURL('content',BLang::$langcode,array('view'=>'archive_date','year'=>$nyear,'month'=>$nmonth,'day'=>$nday));
-			//Date of blogs start posting
-			//$syear=2015;
-			//$smonth=12;
-			//$sday=17;
-			//
-			$date=substr($f_path[1],5);
-			$xdate=explode('-',$date);
-			if((count($xdate)!=3)||(strlen($date)!=10)){
-				$this->ctype=CTYPE_REDIRECT301;
-				$this->redirectURL='//'.$url_dtnow;
-				return true;
-				}
-			$iyear=(int)$xdate[0];
-			$imonth=(int)$xdate[1];
-			$iday=(int)$xdate[2];
-			if((empty($iyear))||(empty($iday))||(empty($imonth))){
-				$this->ctype=CTYPE_REDIRECT301;
-				$this->redirectURL='//'.$url_dtnow;
-				return true;
-				}
-			$ddate=new DateTime($iyear.'-'.$imonth.'-'.$iday);
-			//Chek for datetime in future.
-			if(($iyear>$nyear)||(($iyear==$nyear)&&($imonth>$nmonth))||(($iyear==$nyear)&&($imonth==$nmonth)&&($iday>$nday))){
-				$this->ctype=CTYPE_REDIRECT301;
-				$this->redirectURL='//'.$url_dtnow;
-				return true;
-				}
-			//Canonical URL
-			$gen_url=$this->generateURL('content',BLang::$langcode,array('view'=>'archive_date','year'=>$iyear,'month'=>$imonth,'day'=>$iday));
-			$cur_url=$this->host.parse_url($this->url,PHP_URL_PATH);
-			if($cur_url!=$gen_url){
-				$this->ctype=CTYPE_REDIRECT301;
-				$this->redirectURL='//'.$gen_url;
-				return;
-				}
-			$segments['view']='archive_date';
-			$segments['year']=$iyear;
-			$segments['month']=$imonth;
-			$segments['day']=$iday;
-			//
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			$this->softmodulesget('content:archive');
-			return true;
-			}
-		//content with photo
-		if((count($f_path)==1)&&(($f_path[0]=='photo')||$f_path[0]=='video'||$f_path[0]=='search')){
-			$segments['view']=$f_path[0];
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			$this->softmodulesget('content:'.$f_path[0]);
-			return true;
-			}
-		//
-		if((count($f_path)==1)&&($f_path[0]=='mod_photo.json')){
-			$segments['view']='mod_photo_content';
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->ctype=CTYPE_JSON;
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//Новости - модуль новостей по категории. Загрузка аяксом
-		if((count($f_path)==1)&&($f_path[0]=='mod_bycategory.json')){
-			$segments['view']='mod_bycategory_content';
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->ctype=CTYPE_JSON;
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//Новости - модуль новостей по тегу. Загрузка аяксом
-		if((count($f_path)==1)&&($f_path[0]=='mod_bytag.json')){
-
-			$segments['view']='mod_bytag_content';
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				$this->ctype=CTYPE_JSON,
-				'segments'=>$segments,
-			);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			$this->softmodulesget('content: home');
-			return true;
-		}
-		//
-		$suffix=end(explode('-',end($f_path)));
-		//Article
-		if(is_numeric($suffix)){
-			BLog::addtolog('[Router]: found something like content article');
-			$articleid=(int)$suffix;
-			$segments=array('view'=>'article','id'=>$articleid);
-			bimport('content.articles');
-			$bcontentarticles=BNewsArticles::getInstance();
-			$article=$bcontentarticles->item_get($articleid);
-			if(empty($article)){
-				BLog::addtolog('[Router]: Could not load article!',LL_ERROR);
-				return false;
-				}
-			$gen_url=$this->generateURL('content',BLang::$langcode,$segments);
-			$cur_url=$this->host.parse_url($this->url,PHP_URL_PATH);
-			if($cur_url!=$gen_url){
-				$this->ctype=CTYPE_REDIRECT301;
-				$this->redirectURL='//'.$gen_url;
-				return;
-				}
-			$this->contentcat=$article->category;
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments,
-				);
-			$this->addfixedrules();
-			$this->rules[]=$this->maincom;
-			//$this->softmodulesget('content:article:'.$article->id);
-			$this->softmodulesget('content:contentcat:'.$article->category);
-			return true;
-			}
-		//Прес-релизы. Загрузка аяксом
-		if($f_path[count($f_path)-1]=='pr_content.json'){
-			BLog::addtolog('[Router]: found something like random content AJAX loader.');
-			//
-			bimport('content.categories');
-			$bcontentcat=BNewsCategories::getInstance();
-			unset($f_path[count($f_path)-1]);
-			$category=$bcontentcat->getitembyaliaschain($f_path,BLang::$langcode);
-			if(empty($category)){
-				BLog::addtolog('[Router]: Could not load content category!',LL_ERROR);
-				return false;
-				}
-			//
-			if(!empty($category->template)){
-				$this->templatename=$category->template;
-				}
-			bimport('http.request');
-			$segments['view']='pr_content';
-			$segments['basecat']=$category->id;
-			$segments['category']=BRequest::GetInt('category');
-			$segments['limit']=BRequest::GetInt('limit');
-			$this->maincom=(object)array(
-				'com'=>'content',
-				'position'=>'content',
-				'segments'=>$segments
-				);
-			$this->ctype=CTYPE_JSON;
-			$this->rules[]=$this->maincom;
-			return true;
-			}
-		//
-		BLog::addtolog('[Router]: found something like content category');
-		bimport('content.categories');
-		$bcontentcat=BNewsCategories::getInstance();
-		if(end($f_path)==''){
-			array_pop($f_path);
-			}
-		//
-		$category=$bcontentcat->getitembyaliaschain($f_path,BLang::$langcode);
-		if(empty($category)){
-			BLog::addtolog('[Router]: Could not load content category!',LL_ERROR);
-			return false;
-			}
-		//
-		$this->contentcategory=$category->id;
-		$segments['view']='blog';
-		$segments['category']=$category->id;
-
-		if(!empty($category->template)){
-			$this->templatename=$category->template;
-			}
-		//
-		$this->maincom=(object)array(
-			'com'=>'content',
-			'position'=>'content',
-			'segments'=>$segments
-			);
-		$this->addfixedrules();
-		$this->rules[]=$this->maincom;
-		$this->softmodulesget('content:category:'.$category->id);
-		return true;
 		}
 	/**
 	 * Parse /users/ branch.
@@ -469,6 +237,180 @@ class BRouter extends BRouterBase{
 			return true;
 			}
 		BLog::addtolog('[Router]: parseUrlUsers() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
+		return false;
+		}
+	/**
+	 *
+	 */
+	public function parseUrlMembersMyCompanyPayees($companyid,$f_path){
+		BDebug::message('[Router]: parseUrlMembersMyCompanyPayees() $f_path='.var_export($f_path,true));
+		//Unset the latest empty "/" in url.
+		$f_path_count=count($f_path);
+		if(($f_path_count)&&(empty($f_path[$f_path_count-1]))){
+			BDebug::message('[Router]: parseUrlMembersMyCompanyPayees() removing latest "/" character.');
+			unset($f_path[$f_path_count-1]);
+			}
+		//Payees list.
+		if(empty($f_path)){
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'payees','company'=>$companyid),
+				);
+			return true;
+			}
+		//Add payee
+		if($f_path[0]=='add'){
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'payeeadd','company'=>$companyid),
+				);
+			return true;
+			}
+		//Delete payee
+		if($f_path[0]=='delete'){
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'payeedelete','company'=>$companyid),
+				);
+			return true;
+			}
+		//Payee JSON filters
+		if($f_path[0]=='filter.json'){
+			$this->ctype=CTYPE_JSON;
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'payeesjsonfilter','company'=>$companyid),
+				);
+			return true;
+			}
+		//Edit Single Payee 
+		if((is_numeric($f_path[0]))&&($f_path_count==1)){
+			$opg=(int)$f_path[0];
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'payee','company'=>$companyid,'id'=>$opg),
+				);
+			return true;
+			}
+		return false;
+		}
+	/**
+	 *
+	 */
+	public function parseUrlMembersMyCompany($companyid,$f_path){
+		BDebug::message('[Router]: parseUrlMembersMyCompany() $f_path='.var_export($f_path,true));
+		//Unset the latest empty "/" in url.
+		$f_path_count=count($f_path);
+		if(($f_path_count)&&(empty($f_path[$f_path_count-1]))){
+			BDebug::message('[Router]: parseurl_members() removing latest "/" character.');
+			unset($f_path[$f_path_count-1]);
+			}
+		//
+		if(empty($f_path)){
+			$this->rules[]=(object)array(
+				'com' => 'companies',
+				'position' => 'content',
+				'segments' => array('view'=>'mycompany','id'=>$companyid),
+				);
+			return true;
+			}
+		if($f_path[0]=='payees'){
+			array_shift($f_path);
+			return $this->parseUrlMembersMyCompanyPayees($companyid,$f_path);
+			}
+		//
+		if(($f_path[0]=='accounts')&&($f_path_count==1)){
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'accounts','company'=>$companyid),
+				);
+			return true;
+			}
+		//Operations groups.
+		if(($f_path[0]=='opgroups')&&($f_path_count==1)){
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'opgroups','company'=>$companyid),
+				);
+			return true;
+			}
+		//Single operations group.
+		if(($f_path[0]=='opgroups')&&($f_path[1]=='add')){
+			$opg=(int)$f_path[1];
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'opgroupadd','company'=>$companyid,'id'=>$opg),
+				);
+			return true;
+			}
+		//Single operations group.
+		if(($f_path[0]=='opgroups')&&(is_numeric($f_path[1]))&&($f_path_count==2)){
+			$opg=(int)$f_path[1];
+			$this->rules[]=(object)array(
+				'com' => 'compfinances',
+				'position' => 'content',
+				'segments' => array('view'=>'opgroup','company'=>$companyid,'id'=>$opg),
+				);
+			return true;
+			}
+		return false;
+		}
+	/**
+	 * Parse /members/ branch.
+	 * 
+	 * Language - $this->langcode
+	 */
+	public function parseUrlMembers($f_path){
+		$bUsers=\Brilliant\Users\BUsers::GetInstance();
+		$me=$bUsers->getLoggedUser();
+		if(empty($me)){
+			$this->ctype=CTYPE_REDIRECT302;
+			$this->redirectURL=$this->generateUrl('users',array('view'=>'login','lang'=>BLang::$langcode),array('usehostname'=>true)).'?url='.base64_encode('//'.$this->host.$this->url);
+			return true;
+			}
+		BLog::addtolog('[Router]: We are in members branch now!');
+
+		$this->templatename='members';
+		$this->rules[]=(object)array(
+			'com' => 'menu',
+			'position' => 'sidebar',
+			'segments' => array('view'=>'memberssidebar'),
+			);
+		$this->rules[]=(object)array(
+			'com' => 'menu',
+			'position' => 'mainmenu',
+			'segments' => array('view'=>'membersmenu'),
+			);
+
+		//Unset the latest empty "/" in url.
+		if((count($f_path))&&(empty($f_path[count($f_path)-1]))){
+			BLog::addtolog('[Router]: parseUrlUsers() removing latest "/" character.');
+			unset($f_path[count($f_path)-1]);
+			}
+
+		if(empty($f_path)){
+			$this->rules[]=(object)array(
+				'com' => 'users',
+				'position' => 'content',
+				'segments' => array('view'=>'dashboard'),
+				);
+
+			return true;
+			}
+		if($companyid=$this->checkintsuffix($f_path[0],'mycompany-')){
+			BDebug::message('[Router]: Found company with ID='.$companyid);
+			array_shift($f_path);
+			return $this->parseUrlMembersMyCompany($companyid,$f_path);
+			}
+		BDebug::message('[Router]: parseurl_members() $f_path='.var_export($f_path,true));
 		return false;
 		}
 	/**
@@ -523,6 +465,10 @@ class BRouter extends BRouterBase{
 		elseif($f_path[0]=='users'){
 			array_shift($f_path);
 			return $this->parseUrlUsers($f_path);
+			}
+		if($f_path[0]=='members'){
+			array_shift($f_path);
+			return $this->parseUrlMembers($f_path);
 			}
 
 		elseif(count($f_path)==0||(count($f_path)==1&&$f_path[0]=='')){

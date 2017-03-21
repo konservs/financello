@@ -6,7 +6,7 @@
  */
 defined('BEXEC')or die('No direct access!');
 $this->companiescount=$this->companies;
-$brouter=BRouter::getInstance();
+$brouter=\Application\BRouter::getInstance();
 ?>
 <ul class="nav navbar-nav">
 	<li class="active"><a href="#">Your Financello</a></li>

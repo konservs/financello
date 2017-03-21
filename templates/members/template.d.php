@@ -5,13 +5,17 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
-bimport('html.general');
-bimport('cms.breadcrumbs');
+use Brilliant\http\BRequest;
+use Brilliant\html\BHTML;
+use Brilliant\cms\BLang;
+use Brilliant\cms\BBreadcrumbsGeneral;
+use Application\BRouter;
+
 $bhtml=BHTML::getInstance();
-if((defined('GOOGLE_ANALYTICS_ID'))&&(GOOGLE_ANALYTICS_ID!='')){
-	bimport('google.analytics');
-	BGoogleAnalytics::Initialize(GOOGLE_ANALYTICS_ID);
-	}
+//if((defined('GOOGLE_ANALYTICS_ID'))&&(GOOGLE_ANALYTICS_ID!='')){
+//	bimport('google.analytics');
+//	BGoogleAnalytics::Initialize(GOOGLE_ANALYTICS_ID);
+//	}
 //Add noindex for all pages...
 $bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
 $bhtml->add_css('//'.BHOSTNAME_STATIC.'/css/members.css?v=1.0.0');

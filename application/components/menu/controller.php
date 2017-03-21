@@ -7,7 +7,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-class Controller_mainpage extends \Brilliant\mvc\BController{
+class Controller_menu extends \Brilliant\mvc\BController{
 	public function run($segments){
 		switch($segments['view']){
 			//Additional rules
@@ -19,13 +19,13 @@ class Controller_mainpage extends \Brilliant\mvc\BController{
 			default:
 				$model=$this->LoadModel($segments['view']);
 				if(empty($model))
-					return 'Mainpage: could not load model!';
+					return 'Menu: could not load model!';
 				$view=$this->LoadView($segments['view']);
 				if(empty($view))
-					return 'Mainpage: could not load view!';
+					return 'Menu: could not load view!';
 				return($view->generate($model->get_data($segments)));
 				break;
 			}
-		return 'Mainpage: unknown params';
+		return 'Menu: unknown params';
 		}
 	}
