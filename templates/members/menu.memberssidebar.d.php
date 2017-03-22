@@ -5,6 +5,8 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
+use \Brilliant\CMS\BLang;
+$brouter=\Application\BRouter::getInstance();
 ?>
 
 <ul class="nav nav-sidebar">
