@@ -195,7 +195,7 @@ class BRouter extends BRouterBase{
 			$pref=$opt_protocol.BHOSTNAME;
 			}
 		$pref.='/';
-		$lang=isset($segments['lang'])?$segments['lang']:'';
+		$lang=isset($segments['lang'])?$segments['lang']:\Brilliant\CMS\BLang::$langcode;
 		if(($lang!=='en')&&(!empty($lang))){
 			$pref.=$lang.'/';
 			}
