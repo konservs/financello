@@ -23,6 +23,7 @@ $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');
 $bhtml->use_framework('bootstrap');
+$bhtml->use_framework('jquery');
 ?><!DOCTYPE html>
 <html>
 <head>

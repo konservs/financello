@@ -5,7 +5,9 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
-$this->companiescount=$this->companies;
+use \Brilliant\CMS\BLang;
+
+$this->companiescount=count($this->companies);
 $brouter=\Application\BRouter::getInstance();
 ?>
 <ul class="nav navbar-nav">
@@ -20,7 +22,7 @@ $brouter=\Application\BRouter::getInstance();
 				<?php if($i>0): ?>
 				<li class="divider"></li>
 				<?php endif; ?>
-					<li class="dropdown-header"><?php echo htmlspecialchars($company->name); ?></li>
+					<li class="dropdown-header dropdown-header-company"><?php echo htmlspecialchars($company->name); ?></li>
 					<li><a href="<?php echo $brouter->generateURL('compfinances',array('view'=>'opgroups','company'=>$company->id)); ?>"><?php echo BLang::_('COMPANIES_MYCOMP_OPGROUPS'); ?></a></li>
 					<li><a href="<?php echo $brouter->generateURL('compfinances',array('view'=>'accounts','company'=>$company->id)); ?>"><?php echo BLang::_('COMPANIES_MYCOMP_ACCOUTNS'); ?></a></li>
 					<!-- <li><a href="#">Another action</a></li>-->

@@ -18,7 +18,8 @@ class Model_menu_membersmenu extends \Brilliant\MVC\BModel{
 		if(empty($data->me)){
 			return $data;
 			}
-		$data->companies=array();//$data->me->getcompanies();
+		$bCompanies = \Application\Companies\Companies::getInstance();
+		$data->companies = $bCompanies->byUserId($data->me->id);
 		return $data;
 		}
 	}
