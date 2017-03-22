@@ -6,11 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.view');
-bimport('cms.breadcrumbs');
-
-class View_compfinances_opgroup extends BView{
+class View_finances_opgroup extends \Brilliant\MVC\BView{
 	/**
 	 *
 	 */
@@ -20,7 +16,7 @@ class View_compfinances_opgroup extends BView{
 		$this->breadcrumbs->add_element($brouter->generateURL('mainpage',array()),'Financello',true,'');
 		$this->breadcrumbs->add_element($brouter->generateURL('users',array('view'=>'dashboard')),'Members area',true,'fa-dashboard');
 		$this->breadcrumbs->add_element($brouter->generateURL('companies',array('view'=>'mycompany','id'=>$this->company-id)),$this->company->name);
-		$this->breadcrumbs->add_element($brouter->generateURL('compfinances',array('view'=>'opgroups','company'=>$this->company-id)),'Operations');
+		$this->breadcrumbs->add_element($brouter->generateURL('finances',array('view'=>'opgroups','company'=>$this->company-id)),'Operations');
 		if(empty($this->opgroup->id)){
 			$this->breadcrumbs->add_element('','Adding operation group',false);
 			}

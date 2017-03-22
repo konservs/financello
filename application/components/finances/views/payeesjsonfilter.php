@@ -6,11 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.view');
-bimport('cms.breadcrumbs');
-
-class View_compfinances_payeesjsonfilter extends BView{
+class View_finances_payeesjsonfilter extends \Brilliant\MVC\BView{
 	/**
 	 *
 	 */

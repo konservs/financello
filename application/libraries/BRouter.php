@@ -39,6 +39,20 @@ class BRouter extends BRouterBase{
 		return $busers->getLoggedUser();
 		}
 	/**
+	 * For example, check 'mycompany-5' for 'mycompany-' and return 5.
+	 *
+	 * $str  - entire string
+	 * $pref - preffix,
+	 */
+	public function checkIntSuffix($str,$pref){
+		$preflen=strlen($pref);
+		if(substr($str,0,$preflen)!=$pref){
+			return 0;
+			}
+		$ints=substr($str,$preflen);
+		return (int)$ints;
+		}
+	/**
 	 * Add some fixed rules - languages switch, etc.
 	 */
 	public function addfixedrules(){
@@ -243,17 +257,17 @@ class BRouter extends BRouterBase{
 	 *
 	 */
 	public function parseUrlMembersMyCompanyPayees($companyid,$f_path){
-		BDebug::message('[Router]: parseUrlMembersMyCompanyPayees() $f_path='.var_export($f_path,true));
+		BLog::addtolog('[Router]: parseUrlMembersMyCompanyPayees() $f_path='.var_export($f_path,true));
 		//Unset the latest empty "/" in url.
 		$f_path_count=count($f_path);
 		if(($f_path_count)&&(empty($f_path[$f_path_count-1]))){
-			BDebug::message('[Router]: parseUrlMembersMyCompanyPayees() removing latest "/" character.');
+			BLog::addtolog('[Router]: parseUrlMembersMyCompanyPayees() removing latest "/" character.');
 			unset($f_path[$f_path_count-1]);
 			}
 		//Payees list.
 		if(empty($f_path)){
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'payees','company'=>$companyid),
 				);
@@ -262,7 +276,7 @@ class BRouter extends BRouterBase{
 		//Add payee
 		if($f_path[0]=='add'){
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'payeeadd','company'=>$companyid),
 				);
@@ -271,7 +285,7 @@ class BRouter extends BRouterBase{
 		//Delete payee
 		if($f_path[0]=='delete'){
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'payeedelete','company'=>$companyid),
 				);
@@ -281,7 +295,7 @@ class BRouter extends BRouterBase{
 		if($f_path[0]=='filter.json'){
 			$this->ctype=CTYPE_JSON;
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'payeesjsonfilter','company'=>$companyid),
 				);
@@ -291,7 +305,7 @@ class BRouter extends BRouterBase{
 		if((is_numeric($f_path[0]))&&($f_path_count==1)){
 			$opg=(int)$f_path[0];
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'payee','company'=>$companyid,'id'=>$opg),
 				);
@@ -303,11 +317,11 @@ class BRouter extends BRouterBase{
 	 *
 	 */
 	public function parseUrlMembersMyCompany($companyid,$f_path){
-		BDebug::message('[Router]: parseUrlMembersMyCompany() $f_path='.var_export($f_path,true));
+		BLog::addtolog('[Router]: parseUrlMembersMyCompany() $f_path='.var_export($f_path,true));
 		//Unset the latest empty "/" in url.
 		$f_path_count=count($f_path);
 		if(($f_path_count)&&(empty($f_path[$f_path_count-1]))){
-			BDebug::message('[Router]: parseurl_members() removing latest "/" character.');
+			BLog::addtolog('[Router]: parseurl_members() removing latest "/" character.');
 			unset($f_path[$f_path_count-1]);
 			}
 		//
@@ -326,7 +340,7 @@ class BRouter extends BRouterBase{
 		//
 		if(($f_path[0]=='accounts')&&($f_path_count==1)){
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'accounts','company'=>$companyid),
 				);
@@ -335,7 +349,7 @@ class BRouter extends BRouterBase{
 		//Operations groups.
 		if(($f_path[0]=='opgroups')&&($f_path_count==1)){
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'opgroups','company'=>$companyid),
 				);
@@ -345,7 +359,7 @@ class BRouter extends BRouterBase{
 		if(($f_path[0]=='opgroups')&&($f_path[1]=='add')){
 			$opg=(int)$f_path[1];
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'opgroupadd','company'=>$companyid,'id'=>$opg),
 				);
@@ -355,7 +369,7 @@ class BRouter extends BRouterBase{
 		if(($f_path[0]=='opgroups')&&(is_numeric($f_path[1]))&&($f_path_count==2)){
 			$opg=(int)$f_path[1];
 			$this->rules[]=(object)array(
-				'com' => 'compfinances',
+				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'opgroup','company'=>$companyid,'id'=>$opg),
 				);
@@ -392,7 +406,7 @@ class BRouter extends BRouterBase{
 
 		//Unset the latest empty "/" in url.
 		if((count($f_path))&&(empty($f_path[count($f_path)-1]))){
-			BLog::addtolog('[Router]: parseUrlUsers() removing latest "/" character.');
+			BLog::addtolog('[Router]: parseUrlMembers() removing latest "/" character.');
 			unset($f_path[count($f_path)-1]);
 			}
 
@@ -405,12 +419,12 @@ class BRouter extends BRouterBase{
 
 			return true;
 			}
-		if($companyid=$this->checkintsuffix($f_path[0],'mycompany-')){
-			BDebug::message('[Router]: Found company with ID='.$companyid);
+		if($companyid=$this->checkIntSuffix($f_path[0],'mycompany-')){
+			BLog::addtolog('[Router]: Found company with ID='.$companyid);
 			array_shift($f_path);
 			return $this->parseUrlMembersMyCompany($companyid,$f_path);
 			}
-		BDebug::message('[Router]: parseurl_members() $f_path='.var_export($f_path,true));
+		BLog::addtolog('[Router]: parseUrlMembers() $f_path='.var_export($f_path,true));
 		return false;
 		}
 	/**

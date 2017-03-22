@@ -2,13 +2,12 @@
 /**
  * Component to work with companies finances.
  *
- * @author Andrii Biriev
+ * @author Andrii Biriev <a@konservs.com>
+ * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-
-class Controller_compfinances extends BController{
+class Controller_finances extends \Brilliant\MVC\BController{
 	/**
 	 *
 	 */

@@ -6,13 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('companies.general');
-bimport('compfinances.general');
-bimport('projects.general');
-
-class Model_compfinances_opgroup extends BModel{
+class Model_finances_opgroup extends  \Brilliant\MVC\BModel{
 	/**
 	 * Get data.
 	 */

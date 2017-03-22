@@ -6,13 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('companies.general');
-bimport('compfinances.general');
-bimport('users.general');
-
-class Model_compfinances_accounts extends BModel{
+class Model_finances_accounts extends \Brilliant\MVC\BModel{
 	/**
 	 *
 	 */
@@ -21,15 +15,15 @@ class Model_compfinances_accounts extends BModel{
 		$data->error=-1;
 		$data->companyid=(int)$segments['company'];
 		//Check if me is logged...
-		$busers=BUsers::getInstance();
-		$data->me=$busers->getLoggedUser();
+		$bUsers=\Brilliant\Users\BUsers::getInstance();
+		$data->me=$bUsers->getLoggedUser();
 		if(empty($data->me)){
 			$data->error=1;
 			return $data;
 			}
 		//
-		$bcompanies=BCompanies::getInstance();
-		$data->company=$bcompanies->company_get($data->companyid);
+		$bCompanies=\Application\Companies\Companies::getInstance();
+		$data->company=$bCompanies->itemGet($data->companyid);
 		if(empty($data->company)){
 			$data->error=2;
 			return $data;
@@ -39,8 +33,8 @@ class Model_compfinances_accounts extends BModel{
 		$data->can_view=true;//$data->company->canuser($data->me->id,FLAG_CAN_VIEW);
 		$data->can_edit=true;//$data->company->canuser($data->me->id,FLAG_CAN_EDIT);
 		//
-		$bcompfin=BCompFinances::getInstance();
-		$data->accounts=$bcompfin->accounts_get_company($data->companyid);
+		$bcompfin=\Application\Finances\Accounts::getInstance();
+		$data->accounts=array();//$bcompfin->accounts_get_company($data->companyid);
 		//Success!
 		$data->error=0;
 		return $data;

@@ -6,11 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.view');
-bimport('cms.breadcrumbs');
-
-class View_compfinances_opgroups extends BView{
+class View_finances_opgroups extends \Brilliant\MVC\BView{
 	/**
 	 *
 	 */

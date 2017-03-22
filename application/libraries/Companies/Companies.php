@@ -1,17 +1,15 @@
 <?php
-/**
- * Basic class to control companies.
- *
- * @author Andrii Biriev
- */
 namespace Application\Companies;
 
 /**
- * Class Companies
+ * Basic class to control companies
  *
  * @method Company item_get(integer $id)
  * @method Company[] items_get(integer[] $ids)
  * @method Company[] items_filter($params)
+ *
+ * @author Andrii Biriev <a@konservs.com>
+ * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
 class Companies extends \Brilliant\Items\BItemsList{
 	use \Brilliant\BSingleton;

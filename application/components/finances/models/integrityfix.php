@@ -6,13 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('companies.general');
-bimport('compfinances.general');
-bimport('users.general');
-
-class Model_compfinances_integrityfix extends BModel{
+class Model_finances_integrityfix extends  \Brilliant\MVC\BModel{
 	/**
 	 *
 	 */
