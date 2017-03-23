@@ -2,7 +2,7 @@
 namespace Application\Bugtracker;
 
 /**
- * Basic class to control projects
+ * Basic class to control bugtracker issues
  *
  * @method \Application\Bugtracker\Issue itemGet(integer $id)
  * @method \Application\Bugtracker\Issue[] itemsGet(integer[] $ids)
