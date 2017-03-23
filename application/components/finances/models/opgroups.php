@@ -2,16 +2,12 @@
 /**
  * Model to load operation groups.
  *
- * @author Andrii Biriev
+ * @author Andrii Biriev <a@konservs.com>
+ * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('companies.general');
-bimport('compfinances.general');
-
-class Model_compfinances_opgroups extends BModel{
+class Model_finances_opgroups extends \Brilliant\MVC\BModel{
 	/**
 	 * Process filters & get necessary data:
 	 *  - company name;
@@ -27,15 +23,15 @@ class Model_compfinances_opgroups extends BModel{
 		$data->error=-1;
 		$data->companyid=(int)$segments['company'];
 		//Check if me is logged...
-		$busers=BUsers::getInstance();
+		$busers=\Brilliant\Users\BUsers::getInstance();
 		$data->me=$busers->getLoggedUser();
 		if(empty($data->me)){
 			$data->error=1;
 			return $data;
 			}
 		//
-		$bcompanies=BCompanies::getInstance();
-		$data->company=$bcompanies->company_get($data->companyid);
+		$bcompanies=\Application\Companies\Companies::getInstance();
+		$data->company=$bcompanies->itemGet($data->companyid);
 		if(empty($data->company)){
 			$data->error=2;
 			return $data;

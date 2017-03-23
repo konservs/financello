@@ -14,6 +14,6 @@ namespace Application\Finances;
 class Accounts extends \Brilliant\Items\BItemsList{
 	use \Brilliant\BSingleton;
 	protected $tableName='fin_accounts';
-	protected $itemClassName='\Application\Finances\Accounts';
+	protected $itemClassName='\Application\Finances\Account';
 
 	}

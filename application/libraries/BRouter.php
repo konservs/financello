@@ -55,7 +55,7 @@ class BRouter extends BRouterBase{
 	/**
 	 * Add some fixed rules - languages switch, etc.
 	 */
-	public function addfixedrules(){
+	public function addFixedRules(){
 		$user = $this->getLoggedUser();
 		if(!empty($user)){
 			$this->rules[]=(object)array(
@@ -199,7 +199,6 @@ class BRouter extends BRouterBase{
 		if(($lang!=='en')&&(!empty($lang))){
 			$pref.=$lang.'/';
 			}
-		
 		switch($component){
 			case 'content':
 				return $pref.$this->generateUrlContent($lang,$segments);
@@ -393,6 +392,7 @@ class BRouter extends BRouterBase{
 		BLog::addtolog('[Router]: We are in members branch now!');
 
 		$this->templatename='members';
+		$this->addFixedRules();
 		$this->rules[]=(object)array(
 			'com' => 'menu',
 			'position' => 'sidebar',
@@ -435,8 +435,7 @@ class BRouter extends BRouterBase{
 		$u_path=$u['path'];
 		$u_query=$u['query'];
 		$u_fragment=$u['fragment'];
-
-
+		//
 		parse_str($u_query,$f_query);
 		$f_path=explode('/',$u_path);
 		array_shift($f_path);
@@ -452,7 +451,6 @@ class BRouter extends BRouterBase{
 			BLang::init('ru','admin');// adminlagugages
 			return $this->parse_adminurl($f_path);
 			}
-		//
 		//Detect language
 		if(($f_path[0]==='ru')||($f_path[0]==='ua')){
 			$this->langcode=$f_path[0];
@@ -491,7 +489,7 @@ class BRouter extends BRouterBase{
 				'position'=>'content',
 				'segments'=>array('view'=>'mainpage')
 				);
-			$this->addfixedrules();
+			$this->addFixedRules();
 			$this->rules[]=$this->maincom;
 			$this->softmodulesget('mainpage:mainpage');
 			return true;

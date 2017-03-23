@@ -6,12 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('companies.general');
-bimport('compfinances.general');
-
-class Model_compfinances_payeesjsonfilter extends BModel{
+class Model_finances_payeesjsonfilter extends BModel{
 	/**
 	 * Process filters & get necessary data:
 	 */

@@ -6,13 +6,8 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('http.request');
-bimport('companies.general');
-bimport('compfinances.general');
 
-class Model_compfinances_opgroupedit extends BModel{
+class Model_finances_opgroupedit extends BModel{
 	/**
 	 * Get data.
 	 */
