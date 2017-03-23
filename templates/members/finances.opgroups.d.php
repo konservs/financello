@@ -5,7 +5,8 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
-$brouter=BRouter::getInstance();
+use \Brilliant\CMS\BLang;
+$brouter=\Application\BRouter::getInstance();
 ?>
 <div id="compfinances_opgroups">
 	<div class="header">
@@ -42,13 +43,13 @@ $brouter=BRouter::getInstance();
 				<?php foreach($this->opgroups as $opgroup): ?>
 					<tr>
 						<?php $opurl=$brouter->generateUrl('compfinances',array('view'=>'opgroup','lang'=>BLang::$langcode,'company'=>$this->company->id,'id'=>$opgroup->id)); ?>
-						<td><a href="<?php echo $opurl; ?>"><?php echo $opgroup->created->prettydatetime(); ?></a></td>
-						<td><a href="<?php echo $opurl; ?>"><?php echo htmlspecialchars($opgroup->getname()); ?></a></td>
+						<td><a href="<?php echo $opurl; ?>"><?php echo $opgroup->created->prettyDateTime(); ?></a></td>
+						<td><a href="<?php echo $opurl; ?>"><?php echo htmlspecialchars($opgroup->getName()); ?></a></td>
 						<td><?php echo $opgroup->operationscount; ?></td>
 						<td><?php echo $opgroup->formatCurrencies(); ?></td>
 						<td><?php $accounts=$opgroup->getAccounts(); ?>
 							<?php foreach($accounts as $acc): ?>
-								<a href="#"><?php echo $acc->getname(); ?></a>
+								<a href="#"><?php echo $acc->getName(); ?></a>
 							<?php endforeach; ?>
 						</td>
 						<td>

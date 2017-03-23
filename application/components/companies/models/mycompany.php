@@ -6,11 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.model');
-bimport('companies.general');
-
-class Model_companies_mycompany extends BModel{
+class Model_companies_mycompany extends \Brilliant\MVC\BModel{
 	/**
 	 *
 	 */
@@ -18,8 +14,8 @@ class Model_companies_mycompany extends BModel{
 		$data=new stdClass;
 		$data->error=-1;
 		//
-		$bcompanies=BCompanies::getInstance();
-		$data->company=$bcompanies->company_get($segments['id']);
+		$bCompanies=\Application\Companies\Companies::getInstance();
+		$data->company=$bCompanies->itemGet($segments['id']);
 		if(empty($data->company)){
 			return $data;
 			}

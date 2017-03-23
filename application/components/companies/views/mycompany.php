@@ -6,17 +6,13 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-bimport('mvc.component');
-bimport('mvc.view');
-bimport('cms.breadcrumbs');
-
-class View_companies_mycompany extends BView{
+class View_companies_mycompany extends \Brilliant\MVC\BView{
 	/**
 	 *
 	 */
 	public function generate_breadcrumbs(){
-		$brouter=BRouter::getInstance();
-		$this->breadcrumbs=new BBreadcrumbs();
+		$brouter=\Application\BRouter::getInstance();
+		$this->breadcrumbs=new \Brilliant\CMS\BBreadcrumbs();
 		$this->breadcrumbs->add_element($brouter->generateURL('mainpage',array()),'Financello',true,'');
 		$this->breadcrumbs->add_element($brouter->generateURL('users',array('view'=>'dashboard')),'Members area',true,'fa-dashboard');
 		$this->breadcrumbs->add_element('',$this->company->name,false);

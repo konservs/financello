@@ -48,8 +48,8 @@ class Model_finances_opgroups extends \Brilliant\MVC\BModel{
 		$filter['dtfrom']=$dtfrom;
 		//$filter['to']=;
 		//$filter['category']=;
-		$bcompfin=BCompFinances::getInstance();
-		$data->opgroups=$bcompfin->opgroups_get_filter($filter);
+		$bOperationGroups=\Application\Finances\OperationGroups::getInstance();
+		$data->opgroups=$bOperationGroups->itemsFilter($filter);
 		//Success!
 		$data->error=0;
 		return $data;

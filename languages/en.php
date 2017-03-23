@@ -38,4 +38,20 @@ self::$strings=array(
 
 	'COM_MAINPAGE_TITLE'=>'Financello – finance management application',
 
+	'PRETTYDATETIME_COMMON' =>'d %s Y %s H:i',
+	'PRETTYDATETIME_INTIME' =>'at',
+	'PRETTYDATETIME_TODAY' =>'Today at H:i',
+	'PRETTYDATETIME_YESTERDAY' =>'Yesterday at H:i',
+	'PRETTYDATETIME_MONTH_Jan' =>'Jan',
+	'PRETTYDATETIME_MONTH_Feb' =>'Feb',
+	'PRETTYDATETIME_MONTH_Mar' =>'Mar',
+	'PRETTYDATETIME_MONTH_Apr' =>'Apr',
+	'PRETTYDATETIME_MONTH_May' =>'May',
+	'PRETTYDATETIME_MONTH_Jun' =>'Jun',
+	'PRETTYDATETIME_MONTH_Jul' =>'Jul',
+	'PRETTYDATETIME_MONTH_Aug' =>'Aug',
+	'PRETTYDATETIME_MONTH_Sep' =>'Sep',
+	'PRETTYDATETIME_MONTH_Oct' =>'Oct',
+	'PRETTYDATETIME_MONTH_Nov' =>'Nov',
+	'PRETTYDATETIME_MONTH_Dec' =>'Dec',
 	);
