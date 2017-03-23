@@ -1,6 +1,6 @@
 <?php
-namespace Application\Projects;
-use Application\ProjectsTickets;
+namespace Application\Bugtracker;
+use Application\Bugtracker\Issues;
 
 /**
  * Basic class to control single project
@@ -8,9 +8,9 @@ use Application\ProjectsTickets;
  * @author Andrii Biriev <a@konservs.com>
  * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
-class ProjectsTicket extends \Brilliant\Items\BItemsItem{
-	protected $collectionname='\Application\Projects\ProjectsTickets';
-	protected $tableName='projects_tickets';
+class Issue extends \Brilliant\Items\BItemsItem{
+	protected $collectionname='\Application\Bugtracker\Issues';
+	protected $tableName='bugtracker_issues';
 	/**
 	 * @var DateTime
 	 */
