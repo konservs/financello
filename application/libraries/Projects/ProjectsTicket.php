@@ -1,6 +1,6 @@
 <?php
 namespace Application\Projects;
-use Application\Projects;
+use Application\ProjectsTickets;
 
 /**
  * Basic class to control single project
@@ -8,9 +8,9 @@ use Application\Projects;
  * @author Andrii Biriev <a@konservs.com>
  * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
-class Project extends \Brilliant\Items\BItemsItem{
-	protected $collectionname='\Application\Projects\Projects';
-	protected $tableName='projects';
+class ProjectsTicket extends \Brilliant\Items\BItemsItem{
+	protected $collectionname='\Application\Projects\ProjectsTickets';
+	protected $tableName='projects_tickets';
 	/**
 	 * @var DateTime
 	 */
@@ -25,6 +25,7 @@ class Project extends \Brilliant\Items\BItemsItem{
 	function __construct() {
 		parent::__construct();
 		$this->fieldAddRaw('company','int');
+		$this->fieldAddRaw('project','int');
 		$this->fieldAddRaw('name','str');
 		//Created & modified
 		$this->fieldAddRaw('created','dt',array('readonly'=>true));
