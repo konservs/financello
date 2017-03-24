@@ -34,4 +34,10 @@ class Company extends \Brilliant\Items\BItemsItem{
 		$this->fieldAddRaw('created','dt',array('readonly'=>true));
 		$this->fieldAddRaw('modified','dt',array('readonly'=>true));
 		}
+	/**
+	 *
+	 */
+	public function canUser($userId,$flag){
+		return true;
+		}
 	}

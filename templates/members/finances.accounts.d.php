@@ -34,7 +34,7 @@ defined('BEXEC')or die('No direct access!');
 					<tr>
 						<td><?php echo htmlspecialchars($account->name); ?></td>
 						<td>?</td>
-						<td><?php echo htmlspecialchars($account->getcurrencycode3()); ?></td>
+						<td><?php echo htmlspecialchars($account->getCurrencyCode3()); ?></td>
 						<td>
 							<div class="btn-group btn-group-xs" role="group" aria-label="...">
 								<a type="button" class="btn btn-default">Add</a>

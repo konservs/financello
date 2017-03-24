@@ -6,36 +6,25 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-class Model_finances_accounts extends \Brilliant\MVC\BModel{
+use \Application\Companies\Companies;
+use \Application\Finances\Accounts;
+
+class Model_finances_accounts extends \Application\Companies\CompanyModel{
+	public function __construct(){
+		parent::__construct();
+		$this->permissionsFlagView = Companies::$flagCanViewAccounts;
+		$this->permissionsFlagEdit = Companies::$flagCanEditAccounts;
+		}
 	/**
 	 *
 	 */
 	public function get_data($segments){
-		$data=new stdClass;
-		$data->error=-1;
-		$data->companyid=(int)$segments['company'];
-		//Check if me is logged...
-		$bUsers=\Brilliant\Users\BUsers::getInstance();
-		$data->me=$bUsers->getLoggedUser();
-		if(empty($data->me)){
-			$data->error=1;
+		$data=parent::get_data($segments);
+		if($data->error!=0){
 			return $data;
 			}
-		//
-		$bCompanies=\Application\Companies\Companies::getInstance();
-		$data->company=$bCompanies->itemGet($data->companyid);
-		if(empty($data->company)){
-			$data->error=2;
-			return $data;
-			}
-		//Check if the user has access with this company.
-		//TODO: finish this code & library.
-		$data->can_view=true;//$data->company->canuser($data->me->id,FLAG_CAN_VIEW);
-		$data->can_edit=true;//$data->company->canuser($data->me->id,FLAG_CAN_EDIT);
-		//
-		$bcompfin=\Application\Finances\Accounts::getInstance();
-		$data->accounts=array();//$bcompfin->accounts_get_company($data->companyid);
-		//Success!
+		$bAccounts=Accounts::getInstance();
+		$data->accounts=$bAccounts->itemsFilter(array('company'=>$data->companyId));
 		$data->error=0;
 		return $data;
 		}
