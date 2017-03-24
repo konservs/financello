@@ -14,8 +14,10 @@ namespace Application\Companies;
 class Companies extends \Brilliant\Items\BItemsList{
 	use \Brilliant\BSingleton;
 	//Some flags
-	public static $flagCanViewAccounts=1;
-	public static $flagCanEditAccounts=1;
+	public static $flagCanViewCompany=1;
+	public static $flagCanEditCompany=2;
+	public static $flagCanViewAccounts=4;
+	public static $flagCanEditAccounts=8;
 	//
 	protected $tableName='companies';
 	protected $itemClassName='\Application\Companies\Company';

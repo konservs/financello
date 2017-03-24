@@ -170,10 +170,10 @@ class BRouter extends BRouterBase{
 		$view=isset($segments['view'])?$segments['view']:'';
 		//Operations groups
 		if($view=='mycompany'){
-			if(empty($segments['id'])){
+			if(empty($segments['company'])){
 				return '';
 				}
-			$id=(int)$segments['id'];
+			$id=(int)$segments['company'];
 			return 'members/mycompany-'.$id.'/';
 			}
 		return false;
@@ -328,7 +328,7 @@ class BRouter extends BRouterBase{
 			$this->rules[]=(object)array(
 				'com' => 'companies',
 				'position' => 'content',
-				'segments' => array('view'=>'mycompany','id'=>$companyid),
+				'segments' => array('view'=>'mycompany','company'=>$companyid),
 				);
 			return true;
 			}

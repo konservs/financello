@@ -6,21 +6,16 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-class Model_companies_mycompany extends \Brilliant\MVC\BModel{
+use \Application\Companies\Companies;
+use \Application\Finances\Accounts;
+
+class Model_companies_mycompany extends \Application\Companies\CompanyModel{
 	/**
 	 *
 	 */
-	public function get_data($segments){
-		$data=new stdClass;
-		$data->error=-1;
-		//
-		$bCompanies=\Application\Companies\Companies::getInstance();
-		$data->company=$bCompanies->itemGet($segments['id']);
-		if(empty($data->company)){
-			return $data;
-			}
-		//Success!
-		$data->error=0;
-		return $data;
+	public function __construct(){
+		parent::__construct();
+		$this->permissionsFlagView = Companies::$flagCanViewCompany;
+		$this->permissionsFlagEdit = Companies::$flagCanEditCompany;
 		}
 	}
