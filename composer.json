@@ -4,5 +4,8 @@
 			"Brilliant\\": "framework/libraries/",
 			"Application\\": "application/libraries/"
 			}
-		}
+		},
+	"require": {
+		"robmorgan/phinx": "^0.8.0"
 	}
+}
