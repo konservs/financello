@@ -8,7 +8,7 @@ namespace Application\Finances;
  * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
 class Account extends \Brilliant\Items\BItemsItem{
-	protected $collectionname='\Application\Finances\Accounts';
+	protected $collectionName='\Application\Finances\Accounts';
 	protected $tableName='fin_accounts';
 	/**
 	 * Constructor - init fields...
