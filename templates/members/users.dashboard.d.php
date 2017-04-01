@@ -19,6 +19,14 @@ defined('BEXEC')or die('No direct access!');
 	<?php $this->breadcrumbs->draw(); ?>
 
 	<div>
-		items...
+		<?php if(!empty($this->companies)): ?>
+			<?php foreach($this->companies as $company): ?>
+				<div>
+					<div><?php echo htmlspecialchars($company->name); ?></div>
+				</div>
+			<?php endforeach; ?>
+		<?php else: ?>
+			<div class="alert alert-info">Please, create company!</div>
+		<?php endif; ?>
 	</div>
 </div>

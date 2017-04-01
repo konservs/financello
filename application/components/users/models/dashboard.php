@@ -18,6 +18,8 @@ class Model_users_dashboard extends \Brilliant\MVC\BModel{
 		if(empty($data->me)){
 			return $data;
 			}
+		$bCompanies = \Application\Companies\Companies::getInstance();
+		$data->companies = $bCompanies->byUserId($data->me->id);
 		return $data;
 		}
 	}

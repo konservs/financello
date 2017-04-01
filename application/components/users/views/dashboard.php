@@ -28,7 +28,7 @@ class View_users_dashboard extends \Brilliant\MVC\BView{
 		if(empty($this->me)){
 			return 'Could not load user!';
 			}
-		//$this->accounts=$data->accounts;
+		$this->companies=$data->companies;
 		$this->settitle(BLang::_('USERS_DASHBOARD_TITLE'));
 		$this->addmeta('description',BLang::_('USERS_DASHBOARD_METADESC'));
 		$this->generate_breadcrumbs();

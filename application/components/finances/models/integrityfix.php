@@ -6,7 +6,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-class Model_finances_integrityfix extends  \Brilliant\MVC\BModel{
+class Model_finances_integrityfix extends \Brilliant\MVC\BModel{
 	/**
 	 *
 	 */
