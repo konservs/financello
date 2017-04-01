@@ -5,6 +5,7 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
+$bRouter=\Application\BRouter::getInstance();
 ?>
 <div id="users_dashboard">
 	<div class="header">
@@ -22,7 +23,7 @@ defined('BEXEC')or die('No direct access!');
 		<?php if(!empty($this->companies)): ?>
 			<?php foreach($this->companies as $company): ?>
 				<div>
-					<div><?php echo htmlspecialchars($company->name); ?></div>
+					<a href="<?php echo $bRouter->generateURL('companies',array('view'=>'mycompany','company'=>$company->id)); ?>"><?php echo htmlspecialchars($company->name); ?></a>
 				</div>
 			<?php endforeach; ?>
 		<?php else: ?>
