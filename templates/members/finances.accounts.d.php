@@ -1,6 +1,6 @@
 <?php
 /**
- * Tempalte to view accounts list for my company
+ * Template to view accounts list for my company
  *
  * @author: Andrii Birev
  */
