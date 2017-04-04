@@ -15,4 +15,16 @@ class Accounts extends \Brilliant\Items\BItemsList{
 	use \Brilliant\BSingleton;
 	protected $tableName='fin_accounts';
 	protected $itemClassName='\Application\Finances\Account';
+
+	/**
+	 *
+	 */
+	public function itemsFilterSql($params,&$wh,&$jn){
+		parent::itemsFilterSql($params,$wh,$jn);
+		$db=\Brilliant\BFactory::getDBO();
+
+		if(!empty($params['company'])){
+			$wh[]='(`company` = '.(int)$params['company'].')';
+			}
+		}
 	}
