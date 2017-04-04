@@ -345,6 +345,15 @@ class BRouter extends BRouterBase{
 				);
 			return true;
 			}
+		//
+		if(($f_path[0]=='currencies')&&($f_path_count==1)){
+			$this->rules[]=(object)array(
+				'com' => 'finances',
+				'position' => 'content',
+				'segments' => array('view'=>'currencies','company'=>$companyid),
+				);
+			return true;
+			}
 		//Operations groups.
 		if(($f_path[0]=='opgroups')&&($f_path_count==1)){
 			$this->rules[]=(object)array(

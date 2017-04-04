@@ -7,7 +7,7 @@ namespace Application\Finances;
  * @author Andrii Biriev <a@konservs.com>
  * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
  */
-class Currency extends \Brilliant\Items\BItemsItem{
+class Payee extends \Brilliant\Items\BItemsItem{
 	protected $collectionname='\Application\Finances\Payees';
 	protected $tableName='fin_payees';
 	/**
