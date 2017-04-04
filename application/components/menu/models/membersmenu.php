@@ -11,7 +11,7 @@ class Model_menu_membersmenu extends \Brilliant\MVC\BModel{
 	/**
 	 * Model - get data
 	 */
-	public function get_data($segments){
+	public function getData($segments){
 		$data=new stdClass;
 		$busers=\Brilliant\Users\BUsers::getInstance();
 		$data->me=$busers->getLoggedUser();

@@ -23,7 +23,7 @@ class CompanyModel extends \Brilliant\MVC\BModel{
 	/**
 	 *
 	 */
-	public function get_data($segments){
+	public function getData($segments){
 		$data=new \stdClass();
 		$data->error=-1;
 		$data->companyId=(int)$segments['company'];

@@ -18,6 +18,8 @@ class Companies extends \Brilliant\Items\BItemsList{
 	public static $flagCanEditCompany=2;
 	public static $flagCanViewAccounts=4;
 	public static $flagCanEditAccounts=8;
+	public static $flagCanViewCurrencies=16;
+	public static $flagCanEditCurrencies=32;
 	//
 	protected $tableName='companies';
 	protected $itemClassName='\Application\Companies\Company';

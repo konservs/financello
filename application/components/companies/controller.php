@@ -20,6 +20,6 @@ class Controller_companies extends \Brilliant\MVC\BController{
 		if(empty($view)){
 			return 'Companies: could not load view "'.$segments['view'].'"!';
 			}
-		return($view->generate($model->get_data($segments)));
+		return($view->generate($model->getData($segments)));
 		}
 	}

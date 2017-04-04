@@ -21,6 +21,6 @@ class Controller_compprojects extends BController{
 		if(empty($view)){
 			return 'Companies Projects: could not load view!';
 			}
-		return($view->generate($model->get_data($segments)));
+		return($view->generate($model->getData($segments)));
 		}
 	}

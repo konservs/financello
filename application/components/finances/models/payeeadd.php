@@ -10,7 +10,7 @@ class Model_finances_payeeadd extends BModel{
 	/**
 	 * Process filters & get necessary data:
 	 */
-	public function get_data($segments){
+	public function getData($segments){
 		$data=new stdClass;
 		$data->error=-1;
 		$data->companyid=(int)$segments['company'];

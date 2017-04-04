@@ -18,8 +18,8 @@ class Model_finances_accounts extends \Application\Companies\CompanyModel{
 	/**
 	 *
 	 */
-	public function get_data($segments){
-		$data=parent::get_data($segments);
+	public function getData($segments){
+		$data=parent::getData($segments);
 		if($data->error!=0){
 			return $data;
 			}

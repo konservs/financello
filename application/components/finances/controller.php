@@ -22,7 +22,7 @@ class Controller_finances extends \Brilliant\MVC\BController{
 				if(empty($view)){
 					return 'Companies Finances: could not load view "'.$segments['view'].'"!';
 					}
-				return($view->generate($model->get_data($segments)));
+				return($view->generate($model->getData($segments)));
 				break;
 			default:
 				$model=$this->LoadModel($segments['view']);
@@ -33,7 +33,7 @@ class Controller_finances extends \Brilliant\MVC\BController{
 				if(empty($view)){
 					return 'Companies Finances: could not load view "'.$segments['view'].'"!';
 					}
-				return($view->generate($model->get_data($segments)));
+				return($view->generate($model->getData($segments)));
 				break;
 			}
 		return 'Companies Finances: unknown params';
