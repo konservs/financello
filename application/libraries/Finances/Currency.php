@@ -24,4 +24,14 @@ class Currency extends BItemsItem {
 		parent::__construct();
 		$this->fieldAddRaw('code3', 'str');
 	}
+
+	/**
+	 * Format money
+	 *
+	 * @param double $number
+	 * @return string
+	 */
+	public function formatMoney($number) {
+		return sprintf('%2.2f', $number);
+	}
 }

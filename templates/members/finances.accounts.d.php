@@ -4,7 +4,7 @@
  *
  * @author: Andrii Birev
  */
-defined('BEXEC')or die('No direct access!');
+defined('BEXEC') or die('No direct access!');
 ?>
 <div id="compfinances_accounts">
 	<div class="header">
@@ -19,7 +19,7 @@ defined('BEXEC')or die('No direct access!');
 	<?php $this->breadcrumbs->draw(); ?>
 
 
-	<?php if(!empty($this->accounts)): ?>
+	<?php if (!empty($this->accounts)): ?>
 		<div class="panel panel-default">
 			<div class="panel-heading">Finance accounts</div>
 			<table class="table table-striped">
@@ -30,10 +30,10 @@ defined('BEXEC')or die('No direct access!');
 					<th width="150">Actions</th>
 					<th width="1">ID</th>
 				</tr>
-				<?php foreach($this->accounts as $account): ?>
+				<?php foreach ($this->accounts as $account): ?>
 					<tr>
 						<td><?php echo htmlspecialchars($account->name); ?></td>
-						<td>?</td>
+						<td><?php echo htmlspecialchars($account->formatBalance()); ?></td>
 						<td><?php echo htmlspecialchars($account->getCurrencyCode3()); ?></td>
 						<td>
 							<div class="btn-group btn-group-xs" role="group" aria-label="...">
