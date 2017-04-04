@@ -1,5 +1,5 @@
 <?php
-namespace \Application\Finances;
+namespace Application\Finances;
 
 /**
  * Basic class to control companies
