@@ -7,7 +7,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-class Model_mainpage_mainpage extends \Brilliant\mvc\BModel{
+class Model_mainpage_mainpage extends \Brilliant\MVC\BModel{
 	public function getData($segments){
 		$data=new stdClass;
 		return $data;
