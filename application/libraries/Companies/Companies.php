@@ -81,13 +81,24 @@ class Companies extends BItemsList {
 				$wh[] = '(`director`=' . (int)$params['director'] . ')';
 			}
 		}
+		if (!empty($params['user'])) {
+			$jn[] = 'left join `companies_users` on `companies_users`.`company` = `companies`.`id`';
+			if (is_array($params['user'])) {
+				$wh[] = '(`companies_users`.`user` in (' . implode(',', $params['user']) . '))';
+			} else {
+				$wh[] = '(`companies_users`.`user`=' . (int)$params['user'] . ')';
+			}
+		}
 		return true;
 	}
 
 	/**
+	 * get companies list by user ID
 	 *
+	 * @param $userId
+	 * @return Company[]
 	 */
 	public function byUserId($userId) {
-		return $this->itemsFilter(array('director' => $userId, 'published' => 'P'));
+		return $this->itemsFilter(array('user' => $userId, 'published' => 'P'));
 	}
 }
