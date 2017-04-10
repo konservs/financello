@@ -51,6 +51,6 @@ class View_finances_currencies extends \Brilliant\MVC\BView{
 		$this->currencies=$data->currencies;
 
 		$this->generate_breadcrumbs();
-		return $this->template_load();
+		return $this->templateLoad();
 		}
 	}

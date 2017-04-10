@@ -51,6 +51,6 @@ class View_finances_accounts extends \Brilliant\MVC\BView{
 		$this->accounts=$data->accounts;
 
 		$this->generate_breadcrumbs();
-		return $this->template_load();
+		return $this->templateLoad();
 		}
 	}

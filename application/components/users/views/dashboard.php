@@ -32,6 +32,6 @@ class View_users_dashboard extends \Brilliant\MVC\BView{
 		$this->settitle(BLang::_('USERS_DASHBOARD_TITLE'));
 		$this->addmeta('description',BLang::_('USERS_DASHBOARD_METADESC'));
 		$this->generate_breadcrumbs();
-		return $this->template_load();
+		return $this->templateLoad();
 		}
 	}

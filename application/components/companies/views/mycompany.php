@@ -24,7 +24,7 @@ class View_companies_mycompany extends \Brilliant\MVC\BView {
 	public function generate($data) {
 		if ($data->error == 403) {
 			$this->setStatus(403);
-			return $this->template_load('#error_403', true);
+			return $this->templateLoad('#error_403', true);
 		}
 		if ($data->error != 0) {
 			$this->setStatus(500);
@@ -36,6 +36,6 @@ class View_companies_mycompany extends \Brilliant\MVC\BView {
 			return 'Could not load company';
 		}
 		$this->generate_breadcrumbs();
-		return $this->template_load();
+		return $this->templateLoad();
 	}
 }

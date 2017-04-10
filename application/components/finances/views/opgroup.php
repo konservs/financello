@@ -42,6 +42,6 @@ class View_finances_opgroup extends \Brilliant\MVC\BView{
 		$this->projects=$data->projects;
 		//
 		$this->generate_breadcrumbs();
-		return $this->template_load();
+		return $this->templateLoad();
 		}
 	}

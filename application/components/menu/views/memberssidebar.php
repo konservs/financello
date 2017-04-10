@@ -17,6 +17,6 @@ class View_menu_memberssidebar extends \Brilliant\MVC\BView{
 			return 'Could not load user!';
 			}
 		$this->companies=$data->companies;
-		return $this->template_load();
+		return $this->templateLoad();
 		}
 	}

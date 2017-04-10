@@ -3,7 +3,7 @@
  * View for operation groups.
  *
  * @author Andrii Biriev <a@konservs.com>
- * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
+ * @copyright ï¿½ Andrii Biriev, a@konservs.com, www.konservs.com
  */
 defined('BEXEC') or die('No direct access!');
 
@@ -32,6 +32,6 @@ class View_finances_opgroups extends \Brilliant\MVC\BView{
 		$this->opgroups=$data->opgroups;
 
 		$this->generate_breadcrumbs();
-		return $this->template_load();
+		return $this->templateLoad();
 		}
 	}
