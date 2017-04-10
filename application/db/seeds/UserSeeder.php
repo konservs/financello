@@ -4,6 +4,8 @@ use Brilliant\Users\BUser;
 use Brilliant\Users\BUsers;
 use Application\Companies\Company;
 use Application\Companies\Companies;
+use Application\Companies\CompanyUser;
+use Application\Companies\CompanyUsers;
 
 class UserSeeder extends AbstractSeed {
 	/**
@@ -52,6 +54,28 @@ class UserSeeder extends AbstractSeed {
 	}
 
 	/**
+	 * Append user to company
+	 *
+	 * @param $userId int
+	 * @param $companyId int
+	 * @param $accessFlags string[]
+	 * @return CompanyUser|null
+	 */
+	protected function appendUserToCompany($userId, $companyId, $accessFlags) {
+		$companyUser = new CompanyUser();
+		$companyUser->user = $userId;
+		$companyUser->company = $companyId;
+		foreach ($accessFlags as $flag) {
+			$companyUser->setAccessFlag($flag, 1);
+		}
+		$r = $companyUser->saveToDB();
+		if (empty($r)) {
+			return NULL;
+		}
+		return $companyUser;
+	}
+
+	/**
 	 * Run Method.
 	 */
 	public function run() {
@@ -62,7 +86,12 @@ class UserSeeder extends AbstractSeed {
 		define('MYSQL_DB_NAME', $options['name']);
 		//getFaker
 		$faker = \Faker\Factory::create();
+		//
+		$db = \Brilliant\BFactory::getDBO();
+		$db->query('SET FOREIGN_KEY_CHECKS=0');
 		//Truncate Table
+		$bCompaniesUsers = CompanyUsers::getInstance();
+		$bCompaniesUsers->truncateAll();
 		$bCompanies = Companies::getInstance();
 		$bCompanies->truncateAll();
 		$bUsers = BUsers::getInstance();
@@ -71,15 +100,21 @@ class UserSeeder extends AbstractSeed {
 		$this->createUser('Administrator', 'admin@financello.com', '0000', 'P', 'Y');
 		//Company #1
 		$user11 = $this->createUser($faker->name, 'boss@company1.com', '0000', 'P', 'N');
-		$this->createUser($faker->name, 'accountant@company1.com', '0000', 'P', 'N');
-		$this->createUser($faker->name, 'mgr1@company1.com', '0000', 'P', 'N');
-		$this->createUser($faker->name, 'mgr2@company1.com', '0000', 'P', 'N');
-		$this->createCompany($faker->company, 'C', 'P', $user11->id);
+		$user12 = $this->createUser($faker->name, 'accountant@company1.com', '0000', 'P', 'N');
+		$user13 = $this->createUser($faker->name, 'mgr1@company1.com', '0000', 'P', 'N');
+		$user14 = $this->createUser($faker->name, 'mgr2@company1.com', '0000', 'P', 'N');
+		$company1 = $this->createCompany($faker->company, 'C', 'P', $user11->id);
+		$this->appendUserToCompany($user12->id, $company1->id, Companies::getAllFlags());
+		$this->appendUserToCompany($user13->id, $company1->id, Companies::getAllFlags());
+		$this->appendUserToCompany($user14->id, $company1->id, Companies::getAllFlags());
 		//Company #1
 		$user21 = $this->createUser($faker->name, 'boss@company2.com', '0000', 'P', 'N');
-		$this->createUser($faker->name, 'accountant@company2.com', '0000', 'P', 'N');
-		$this->createUser($faker->name, 'mgr1@company2.com', '0000', 'P', 'N');
-		$this->createUser($faker->name, 'mgr2@company2.com', '0000', 'P', 'N');
-		$this->createCompany($faker->company, 'C', 'P', $user21->id);
+		$user22 = $this->createUser($faker->name, 'accountant@company2.com', '0000', 'P', 'N');
+		$user23 = $this->createUser($faker->name, 'mgr1@company2.com', '0000', 'P', 'N');
+		$user24 = $this->createUser($faker->name, 'mgr2@company2.com', '0000', 'P', 'N');
+		$company2 = $this->createCompany($faker->company, 'C', 'P', $user21->id);
+		$this->appendUserToCompany($user22->id, $company2->id, Companies::getAllFlags());
+		$this->appendUserToCompany($user23->id, $company2->id, Companies::getAllFlags());
+		$this->appendUserToCompany($user24->id, $company2->id, Companies::getAllFlags());
 	}
 }

@@ -6,9 +6,11 @@
  */
 namespace Application\Companies;
 
-use Application\Companies\Company;
+use \Application\Companies\Companies;
+use \Application\Companies\CompanyUsers;
+use \Brilliant\Items\BItemsItem;
 
-class Company extends \Brilliant\Items\BItemsItem {
+class Company extends BItemsItem {
 	protected $collectionName = 'Company';
 	protected $tableName = 'companies';
 	/**
@@ -53,12 +55,21 @@ class Company extends \Brilliant\Items\BItemsItem {
 	}
 
 	/**
+	 * can user or not?
 	 *
+	 * @param $userId int
+	 * @param $flag string
+	 * @return bool
 	 */
 	public function canUser($userId, $flag) {
 		if ($this->director == $userId) {
 			return true;
 		}
-		return false;
+		$bCompanyUsers = CompanyUsers::getInstance();
+		$companyUser = $bCompanyUsers->itemsFilterFirst(['company' => $this->id, 'user' => $userId]);
+		if (empty($companyUser)) {
+			return false;
+		}
+		return $companyUser->getAccessFlag($flag);
 	}
 }

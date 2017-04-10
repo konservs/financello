@@ -45,8 +45,9 @@ class CompanyModel extends BModel {
 			return $data;
 		}
 		//Check if the user has access with this company.
-		$data->canView = ($this->permissionsFlagView == 0) || ($data->company->canUser($data->me->id, $this->permissionsFlagView));
-		$data->canEdit = ($this->permissionsFlagEdit == 0) || ($data->company->canUser($data->me->id, $this->permissionsFlagEdit));
+		$data->canView = (empty($this->permissionsFlagView)) || ($data->company->canUser($data->me->id, $this->permissionsFlagView));
+		$data->canEdit = (empty($this->permissionsFlagView)) || ($data->company->canUser($data->me->id, $this->permissionsFlagEdit));
+
 		if ((!$data->canView) && (!$data->canEdit)) {
 			$data->error = 403;
 			return $data;

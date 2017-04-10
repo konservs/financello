@@ -1,6 +1,10 @@
 <?php
 namespace Application\Companies;
 
+use \Brilliant\BFactory;
+use \Brilliant\BSingleton;
+use \Brilliant\Items\BItemsList;
+
 /**
  * Basic class to control companies
  *
@@ -9,58 +13,81 @@ namespace Application\Companies;
  * @method Company[] items_filter($params)
  *
  * @author Andrii Biriev <a@konservs.com>
- * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
+ * @copyright Â© Andrii Biriev, a@konservs.com, www.konservs.com
  */
-class Companies extends \Brilliant\Items\BItemsList{
-	use \Brilliant\BSingleton;
+class Companies extends BItemsList {
+	use BSingleton;
 	//Some flags
-	public static $flagCanViewCompany=1;
-	public static $flagCanEditCompany=2;
-	public static $flagCanViewAccounts=4;
-	public static $flagCanEditAccounts=8;
-	public static $flagCanViewCurrencies=16;
-	public static $flagCanEditCurrencies=32;
+	public static $flagCanViewCompany = 'companyView';
+	public static $flagCanEditCompany = 'companyEdit';
+	public static $flagCanViewAccounts = 'accountsView';
+	public static $flagCanEditAccounts = 'accountsEdit';
+	public static $flagCanViewCurrencies = 'currenciesView';
+	public static $flagCanEditCurrencies = 'currenciesEdit';
 	//
-	protected $tableName='companies';
-	protected $itemClassName='\Application\Companies\Company';
+	protected $tableName = 'companies';
+	protected $itemClassName = '\Application\Companies\Company';
+
+	/**
+	 * Get all access flags
+	 *
+	 * @return string[]
+	 */
+	public static function getAllFlags() {
+		$res = array();
+		$res[] = self::$flagCanViewCompany;
+		$res[] = self::$flagCanEditCompany;
+		$res[] = self::$flagCanViewAccounts;
+		$res[] = self::$flagCanEditAccounts;
+		$res[] = self::$flagCanViewCurrencies;
+		$res[] = self::$flagCanEditCurrencies;
+		return $res;
+	}
+
+	/**
+	 *
+	 * @param $params
+	 * @param $wh
+	 * @param $jn
+	 *
+	 * @return bool
+	 */
+	public function itemsFilterSql($params, &$wh, &$jn) {
+		parent::itemsFilterSql($params, $wh, $jn);
+		$db = BFactory::getDBO();
+		if (!empty($params['keyword'])) {
+			$keyword = mb_strtolower($params['keyword'], 'UTF-8');
+			$keyword = trim($keyword);
+			$keyword = str_replace('ï¿½', '_', $keyword);
+			$keyword = str_replace('\'', '_', $keyword);
+			$languages = BLang::langlist();
+			$sql = '';
+			foreach ($languages as $lang) {
+				$sql .= empty($sql) ? ' ' : 'OR';
+				$sql .= ' (lower(`name_' . $lang . '`) like ' . $db->escape_string('%' . $keyword . '%') . ')';
+			}
+			$wh[] = $sql;
+		}
+		if (!empty($params['status'])) {
+			$wh[] = '(`status` = "' . $params['status'] . '")';
+		}
+		if (!empty($params['published'])) {
+			$wh[] = '(`published` = "' . $params['published'] . '")';
+		}
+		if (!empty($params['director'])) {
+			if (is_array($params['director'])) {
+				$wh[] = '(`director` in (' . implode(',', $params['director']) . '))';
+			} else {
+				$wh[] = '(`director`=' . (int)$params['director'] . ')';
+			}
+		}
+		return true;
+	}
 
 	/**
 	 *
 	 */
-	public function itemsFilterSql($params,&$wh,&$jn){
-		parent::itemsFilterSql($params,$wh,$jn);
-		$db=\Brilliant\BFactory::getDBO();
-		if(!empty($params['keyword'])){
-			$keyword=mb_strtolower($params['keyword'],'UTF-8');
-			$keyword=trim($keyword);
-			$keyword=str_replace('’','_',$keyword);
-			$keyword=str_replace('\'','_',$keyword);
-			$languages=BLang::langlist();
-			$sql='';
-			foreach($languages as $lang){
-				$sql.=empty($sql)?' ':'OR';
-				$sql.=' (lower(`name_'.$lang.'`) like '.$db->escape_string('%'.$keyword.'%').')';
-				}
-			$wh[]=$sql;
-			}
-		if(!empty($params['status'])){
-			$wh[]='(`status` = "'.$params['status'].'")';
-			}
-		if(!empty($params['published'])){
-			$wh[]='(`published` = "'.$params['published'].'")';
-			}
-		if(!empty($params['director'])){
-			if(is_array($params['director'])){
-				$wh[]='(`director` in ('.implode(',',$params['director']).'))';
-				}else{
-				$wh[]='(`director`='.(int)$params['director'].')';
-				}
-			}
-		}
-	/**
-	 *
-	 */
-	public function byUserId($userId){
-		return $this->itemsFilter(array('director'=>$userId,'published'=>'P'));
-		}
+	public function byUserId($userId) {
+		return $this->itemsFilter(array('director' => $userId, 'published' => 'P'));
 	}
+}
