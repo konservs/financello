@@ -56,6 +56,9 @@ class Company extends \Brilliant\Items\BItemsItem {
 	 *
 	 */
 	public function canUser($userId, $flag) {
-		return true;
+		if ($this->director == $userId) {
+			return true;
+		}
+		return false;
 	}
 }
