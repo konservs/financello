@@ -17,7 +17,7 @@ class InitSessions extends AbstractMigration{
 			->addColumn('lastaction', 'datetime')
 			->addColumn('userid', 'integer', ['signed'=>false])
 			->addColumn('data', 'string', ['length'=>128])
-			->addForeignKey('user', 'users', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
+			->addForeignKey('userid', 'users', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
 			->create();
 		}
 	}

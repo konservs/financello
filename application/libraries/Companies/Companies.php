@@ -8,9 +8,9 @@ use \Brilliant\Items\BItemsList;
 /**
  * Basic class to control companies
  *
- * @method Company item_get(integer $id)
- * @method Company[] items_get(integer[] $ids)
- * @method Company[] items_filter($params)
+ * @method Company itemGet(integer $id)
+ * @method Company[] itemsGet(integer[] $ids)
+ * @method Company[] itemsFilter($params)
  *
  * @author Andrii Biriev <a@konservs.com>
  * @copyright © Andrii Biriev, a@konservs.com, www.konservs.com
