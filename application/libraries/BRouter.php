@@ -176,6 +176,9 @@ class BRouter extends BRouterBase{
 			$id=(int)$segments['company'];
 			return 'members/mycompany-'.$id.'/';
 			}
+		if($view=='newcompany'){
+			return 'members/newcompany';
+			}
 		return false;
 		}
 	/**
@@ -420,12 +423,21 @@ class BRouter extends BRouterBase{
 			}
 
 		if(empty($f_path)){
-			$this->rules[]=(object)array(
+			$this->maincom=(object)array(
 				'com' => 'users',
 				'position' => 'content',
 				'segments' => array('view'=>'dashboard'),
 				);
-
+			$this->rules[]=$this->maincom;
+			return true;
+			}
+		if($f_path[0]=='newcompany'){
+			$this->maincom=(object)array(
+				'com' => 'companies',
+				'position' => 'content',
+				'segments' => array('view'=>'newcompany'),
+				);
+			$this->rules[]=$this->maincom;
 			return true;
 			}
 		if($companyid=$this->checkIntSuffix($f_path[0],'mycompany-')){
