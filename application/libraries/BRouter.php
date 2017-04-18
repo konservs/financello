@@ -130,7 +130,7 @@ class BRouter extends BRouterBase{
 	public function generateUrlUsers($lang, $segments){
 		$URL_users='users/';
 		$view=isset($segments['view'])?$segments['view']:'';
-		if(($view=='logout')||($view=='login')||($view=='register')) {
+		if(($view=='logout')||($view=='login')||($view=='register')||($view=='register_company')) {
 			return $URL_users.$view;
 			}
 		//Control panel
@@ -242,7 +242,7 @@ class BRouter extends BRouterBase{
 			unset($f_path[count($f_path)-1]);
 			}
 		//
-		if((count($f_path)==1)&&(($f_path[0]=='login')||($f_path[0]=='logout')||($f_path[0]=='register'))){
+		if((count($f_path)==1)&&(($f_path[0]=='login')||($f_path[0]=='logout')||($f_path[0]=='register')||($f_path[0]=='register_company'))){
 			$this->maincom=(object)array(
 				'com'=>'users',
 				'position'=>'content',
