@@ -13,12 +13,34 @@ $urlRegisterCompany = $bRouter->generateURL('users',array('view'=>'register_comp
 <div id="users_register">
 	<div class="container">
 		<h2>Registration at Financello</h2>
-		<ul class="nav nav-pills">
+
+		<ul class="nav nav-pills register-nav">
 			<li role="presentation" class="active"><a href="#">Register User</a></li>
 			<li role="presentation"><a href="<?php echo $urlRegisterCompany; ?>">Register Company</a></li>
 		</ul>
 
-		<p>The Financello is in beta version now. The registration is temporary closed!</p>
+		<form class="form-register" method="POST" autocomplete="off">
+			<div class="alert alert-info">You are registering as a single user. After signup, you could accept invites from other companies or create own.</div>
+
+			<div class="form-field form-register-field">
+				<label for="inputName" class="sr-only">Name</label>
+				<input type="text" name="name" id="inputName" class="form-control" placeholder="Your name" required="" autofocus="" value="" autocomplete="off">
+			</div>
+
+
+			<div class="form-field form-register-field">
+				<label for="inputEmail" class="sr-only">Email address</label>
+				<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" value="" autocomplete="off">
+			</div>
+
+			<div class="form-field form-register-field">
+				<label for="inputPassword" class="sr-only">Password</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" value="" autocomplete="off">
+			</div>
+
+			<input type="hidden" name="do" value="register">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Create new user</button>
+		</form>
 
 	</div>
 </div>

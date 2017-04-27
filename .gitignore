@@ -3,3 +3,4 @@
 /filecache/*.dat
 /.idea
 /composer.lock
+/static/css/main_users_register.css
