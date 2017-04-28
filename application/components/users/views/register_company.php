@@ -25,8 +25,8 @@ class View_users_register_company extends \Brilliant\MVC\BView{
 	 */
 	public function generate($data){
 		$this->companies=$data->companies;
-		$this->settitle(BLang::_('USERS_REGISTER_COMPANY_TITLE'));
-		$this->addmeta('description',BLang::_('USERS_DASHBOARD_METADESC'));
+		$this->setTitle(BLang::_('USERS_REGISTER_COMPANY_TITLE'));
+		$this->addMeta('description',BLang::_('USERS_DASHBOARD_METADESC'));
 		$this->generate_breadcrumbs();
 		return $this->templateLoad();
 		}

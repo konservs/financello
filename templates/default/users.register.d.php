@@ -22,20 +22,24 @@ $urlRegisterCompany = $bRouter->generateURL('users',array('view'=>'register_comp
 		<form class="form-register" method="POST" autocomplete="off">
 			<div class="alert alert-info">You are registering as a single user. After signup, you could accept invites from other companies or create own.</div>
 
+			<?php foreach($this->errors as $error): ?>
+				<div class="alert alert-danger"><?php echo $error; ?></div>
+			<?php endforeach; ?>
+
 			<div class="form-field form-register-field">
 				<label for="inputName" class="sr-only">Name</label>
-				<input type="text" name="name" id="inputName" class="form-control" placeholder="Your name" required="" autofocus="" value="" autocomplete="off">
+				<input type="text" name="name" id="inputName" class="form-control" placeholder="Your name" required="" autofocus="" value="<?php echo $this->name; ?>" autocomplete="off">
 			</div>
 
 
 			<div class="form-field form-register-field">
 				<label for="inputEmail" class="sr-only">Email address</label>
-				<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" value="" autocomplete="off">
+				<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" value="<?php echo $this->email; ?>" autocomplete="off">
 			</div>
 
 			<div class="form-field form-register-field">
 				<label for="inputPassword" class="sr-only">Password</label>
-				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" value="" autocomplete="off">
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" value="<?php echo $this->password; ?>" autocomplete="off">
 			</div>
 
 			<input type="hidden" name="do" value="register">
