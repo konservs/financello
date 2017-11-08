@@ -9,7 +9,7 @@ class Frameworks{
 	/**
 	 *
 	 */
-	public function use_framework($alias=''){
+	public function useFramework($alias=''){
 		$this->list[$alias]=$alias;
 		if($alias=='jquery-ui'){
 			$this->list['jquery']='jquery';
@@ -32,6 +32,9 @@ class Frameworks{
 				case 'select2': 
 					$html->add_js('//'.BHOSTNAME_STATIC.'/libs/select2/select2.min.js');
 					break;					
+				case 'font-awesome':
+					$html->add_css('//'.BHOSTNAME_STATIC.'/fonts/font-awesome/4.7.0/css/font-awesome.min.css','',CSS_PRIORITY_FRAMEWORK2);
+					break;
 				default:
 					BLog::addtolog('Unknown framework "'.$framework.'"');
 				}

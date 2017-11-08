@@ -22,8 +22,8 @@ $bhtml->add_css('//'.BHOSTNAME_STATIC.'/css/members.css?v=1.0.0');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');
-$bhtml->use_framework('bootstrap');
-$bhtml->use_framework('jquery');
+$bhtml->useFramework('bootstrap');
+$bhtml->useFramework('jquery');
 ?><!DOCTYPE html>
 <html>
 <head>

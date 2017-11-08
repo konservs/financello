@@ -6,8 +6,8 @@
  */
 defined('BEXEC')or die('No direct access!');
 use \Brilliant\CMS\BLang;
+$this->useFramework('font-awesome');
 $bRouter=\Application\BRouter::getInstance();
-
 $urlNewCompany=$bRouter->generateUrl('companies',array('view'=>'newcompany','lang'=>BLang::$langcode));
 ?>
 <div id="users_dashboard">
@@ -25,12 +25,16 @@ $urlNewCompany=$bRouter->generateUrl('companies',array('view'=>'newcompany','lan
 	<div>
 		<?php if(!empty($this->companies)): ?>
 			<?php foreach($this->companies as $company): ?>
-				<div>
-					<a href="<?php echo $bRouter->generateURL('companies',array('view'=>'mycompany','lang'=>BLang::$langcode,'company'=>$company->id)); ?>"><?php echo htmlspecialchars($company->name); ?></a>
-				</div>
+				<?php $this->company = $company; ?>
+				<?php echo $this->templateLoad('company'); ?>
 			<?php endforeach; ?>
 		<?php else: ?>
 			<div class="alert alert-info">Please, <a href="<?php echo $urlNewCompany; ?>">create company</a>!</div>
 		<?php endif; ?>
+	</div>
+
+	<div>
+		<h3>Financello dashboard</h3>
+		<p>Welcome to financello system! If you don't have.</p>
 	</div>
 </div>

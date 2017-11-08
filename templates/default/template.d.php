@@ -21,12 +21,12 @@ $brouter=BRouter::getInstance();
 if((defined('DEBUG_SITENOINDEX'))&&(DEBUG_SITENOINDEX)){
 	$bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
 	}
-$bhtml->use_framework('jquery');
+$bhtml->useFramework('jquery');
 $bhtml->add_css('//'.BHOSTNAME_STATIC.'/css/main.css?v=1.5.4');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');
-$bhtml->use_framework('bootstrap');
+$bhtml->useFramework('bootstrap');
 //
 $bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'56x56','href'=>URL_STATIC.'favicon/apple-icon-57x57.png'));
 $bhtml->add_link(array('rel'=>'apple-touch-icon','sizes'=>'60x60','href'=>URL_STATIC.'favicon/apple-icon-60x60.png'));

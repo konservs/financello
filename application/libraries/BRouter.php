@@ -161,6 +161,11 @@ class BRouter extends BRouterBase{
 			$id=(int)$segments['id'];
 			return 'members/mycompany-'.$company.'/opgroups/'.$id;
 			}
+		//Finances accounts
+		if($view=='accounts'){
+			return 'members/mycompany-'.$company.'/accounts/';
+			}
+
 		return false;
 		}
 	/**
