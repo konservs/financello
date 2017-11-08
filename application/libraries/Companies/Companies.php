@@ -89,6 +89,16 @@ class Companies extends BItemsList {
 				$wh[] = '(`companies_users`.`user`=' . (int)$params['user'] . ')';
 			}
 		}
+		if (!empty($params['userordirector'])) {
+			$jn[] = 'left join `companies_users` on `companies_users`.`company` = `companies`.`id`';
+			if (is_array($params['userordirector'])) {
+				$uids = implode(',', $params['userordirector']);
+				$wh[] = '((`companies_users`.`user` in (' . $uids . ')) OR (`companies`.`director` in (' . $uids . ')))';
+			} else {
+				$uid = (int)$params['userordirector'];
+				$wh[] = '((`companies_users`.`user`=' . $uid . ') OR (`companies`.`director`=' . $uid . '))';
+			}
+		}
 		return true;
 	}
 
@@ -99,6 +109,6 @@ class Companies extends BItemsList {
 	 * @return Company[]
 	 */
 	public function byUserId($userId) {
-		return $this->itemsFilter(array('user' => $userId, 'published' => 'P'));
+		return $this->itemsFilter(array('userordirector' => $userId, 'published' => 'P'));
 	}
 }
