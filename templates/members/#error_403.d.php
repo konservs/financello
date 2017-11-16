@@ -6,8 +6,8 @@
  */
 defined('BEXEC')or die('No direct access!');
 use Application\BRouter;
-use Brilliant\cms\BLang;
-use Brilliant\html\BHTML;
+use Brilliant\CMS\BLang;
+use Brilliant\HTML\BHTML;
 
 $bhtml=BHTML::getInstance();
 $bhtml->add_meta('viewport','width=device-width, initial-scale=0.35, maximum-scale=1, user-scalable=yes');
