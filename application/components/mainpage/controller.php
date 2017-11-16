@@ -7,7 +7,7 @@
  */
 defined('BEXEC') or die('No direct access!');
 
-class Controller_mainpage extends \Brilliant\mvc\BController{
+class Controller_mainpage extends \Brilliant\MVC\BController{
 	public function run($segments){
 		switch($segments['view']){
 			//Additional rules

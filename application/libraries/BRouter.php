@@ -10,10 +10,10 @@
  * @copyright © Andrii Biriev, <a@konservs.com>
  */
 namespace Application;
-use Brilliant\cms\BLang;
-use Brilliant\cms\BRouterBase;
-use Brilliant\log\BLog;
-use Brilliant\users\BUsers;
+use Brilliant\CMS\BLang;
+use Brilliant\CMS\BRouterBase;
+use Brilliant\Log\BLog;
+use Brilliant\Users\BUsers;
 
 class BRouter extends BRouterBase{
 	use \Brilliant\BSingleton;

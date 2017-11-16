@@ -1,8 +1,8 @@
 <?php
 defined('BEXEC') or die('No direct access!');
-use \Brilliant\cms\BLang;
+use \Brilliant\CMS\BLang;
 
-class View_mainpage_mainpage extends \Brilliant\mvc\BView{
+class View_mainpage_mainpage extends \Brilliant\MVC\BView{
 	/**
 	 *
 	 */

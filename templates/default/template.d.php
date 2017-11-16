@@ -5,10 +5,10 @@
 // Author: Andrii Birev
 //==============================================================
 defined('BEXEC')or die('No direct access!');
-use Brilliant\http\BRequest;
-use Brilliant\html\BHTML;
-use Brilliant\cms\BLang;
-use Brilliant\cms\BBreadcrumbsGeneral;
+use Brilliant\HTTP\BRequest;
+use Brilliant\HTML\BHTML;
+use Brilliant\CMS\BLang;
+use Brilliant\CMS\BBreadcrumbsGeneral;
 use Application\BRouter;
 
 $printversion=BRequest::GetInt('printversion');
