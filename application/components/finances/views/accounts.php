@@ -15,7 +15,7 @@ class View_finances_accounts extends \Brilliant\MVC\BView{
 		$this->breadcrumbs=new \Brilliant\CMS\BBreadcrumbs();
 		$this->breadcrumbs->add_element($brouter->generateURL('mainpage',array()),'Financello',true,'');
 		$this->breadcrumbs->add_element($brouter->generateURL('users',array('view'=>'dashboard')),'Members area',true,'fa-dashboard');
-		$this->breadcrumbs->add_element($brouter->generateURL('companies',array('view'=>'mycompany','id'=>$this->company->id)),$this->company->name);
+		$this->breadcrumbs->add_element($brouter->generateURL('companies',array('view'=>'mycompany','company'=>$this->company->id)),$this->company->name);
 		$this->breadcrumbs->add_element('','Accounts',false);
 		}
 	/**
