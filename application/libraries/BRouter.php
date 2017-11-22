@@ -165,6 +165,10 @@ class BRouter extends BRouterBase{
 		if($view=='accounts'){
 			return 'members/mycompany-'.$company.'/accounts/';
 			}
+		//Add new finance account
+		if($view=='accountadd'){
+			return 'members/mycompany-'.$company.'/accounts/add';
+			}
 
 		return false;
 		}
@@ -350,6 +354,15 @@ class BRouter extends BRouterBase{
 				'com' => 'finances',
 				'position' => 'content',
 				'segments' => array('view'=>'accounts','company'=>$companyid),
+				);
+			return true;
+			}
+		//
+		if(($f_path[0]=='accounts')&&($f_path[1]=='add')&&($f_path_count==2)){
+			$this->rules[]=(object)array(
+				'com' => 'finances',
+				'position' => 'content',
+				'segments' => array('view'=>'accountadd','company'=>$companyid),
 				);
 			return true;
 			}

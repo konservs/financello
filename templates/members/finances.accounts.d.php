@@ -8,7 +8,7 @@ defined('BEXEC') or die('No direct access!');
 use \Brilliant\CMS\BLang;
 
 $bRouter=\Application\BRouter::getInstance();
-$urlNewAccount=$bRouter->generateUrl('companies',array('view'=>'accountadd','lang'=>BLang::$langcode));
+$urlNewAccount=$bRouter->generateUrl('finances',array('view'=>'accountadd', 'company'=>$this->company->id, 'lang'=>BLang::$langcode));
 ?>
 <div id="compfinances_accounts">
 	<div class="header">
@@ -50,6 +50,6 @@ $urlNewAccount=$bRouter->generateUrl('companies',array('view'=>'accountadd','lan
 			</table>
 		</div>
 	<?php else: ?>
-		<div class="alert alert-warning">Could not load accounts! Please, create 1 or more financial accounts.</div>
+		<div class="alert alert-warning"><?php echo BLang::__('COMPFINANCES_ACCOUTNS_EMPTYMESSAGE',['companyname'=>$this->company->name, 'addurl'=>$urlNewAccount]); ?></div>
 	<?php endif; ?>
 </div>

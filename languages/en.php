@@ -33,6 +33,7 @@ self::$strings=array(
 	'COMPFINANCES_ACCOUTNS_META_TITLE' => '%companyname% - accounts of the company',
 	'COMPFINANCES_ACCOUTNS_META_DESC' => 'Accounts of company %companyname%, you could view, add or delete accounts here',
 	'COMPFINANCES_ACCOUTNS_META_KEYW' => 'Accounts, Company',
+	'COMPFINANCES_ACCOUTNS_EMPTYMESSAGE' => 'Could not load accounts! Please, <a href="%addurl%">create 1 or more financial accounts</a>.',
 
 	'PROJECTS_PROJECT_PLEASESELECT'=>'- Please, select project -',
 

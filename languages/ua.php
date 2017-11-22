@@ -31,6 +31,7 @@ self::$strings=array(
 	'COMPFINANCES_ACCOUTNS_META_TITLE' => '%companyname% - рахунки компанії',
 	'COMPFINANCES_ACCOUTNS_META_DESC' => 'Рахунки компанії %companyname%, ви можете переглядати, додавати чи видаляти рахунки тут',
 	'COMPFINANCES_ACCOUTNS_META_KEYW' => 'рахунки, компанія',
+	'COMPFINANCES_ACCOUTNS_EMPTYMESSAGE' => 'Список рахунків компанії порожній. Будь ласка, <a href="%addurl%">створіть один або декілька фінансових рахунків</a>.',
 
 	'FINCURRENCY_USD_NAME'=>'Долар США',
 	'FINCURRENCY_EUR_NAME'=>'Євро',

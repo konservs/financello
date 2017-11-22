@@ -31,6 +31,7 @@ self::$strings=array(
 	'COMPFINANCES_ACCOUTNS_META_TITLE' => '%companyname% - счета компании',
 	'COMPFINANCES_ACCOUTNS_META_DESC' => 'Счета компании %companyname%, вы можете просматривать, добавлять или удалять счета тут',
 	'COMPFINANCES_ACCOUTNS_META_KEYW' => 'счета, компания',
+	'COMPFINANCES_ACCOUTNS_EMPTYMESSAGE' => 'Список счетов пустой. Пожалуйста, <a href="%addurl%">создайте один или несколько финансовых счетов</a>.',
 
 	'FINCURRENCY_USD_NAME'=>'Доллар США',
 	'FINCURRENCY_EUR_NAME'=>'Евро',
