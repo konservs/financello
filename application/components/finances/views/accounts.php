@@ -5,6 +5,7 @@
  * @author Andrii Biriev
  */
 defined('BEXEC') or die('No direct access!');
+use \Brilliant\CMS\BLang;
 
 class View_finances_accounts extends \Brilliant\MVC\BView{
 	/**
@@ -17,7 +18,9 @@ class View_finances_accounts extends \Brilliant\MVC\BView{
 		$this->breadcrumbs->add_element($brouter->generateURL('users',array('view'=>'dashboard')),'Members area',true,'fa-dashboard');
 		$this->breadcrumbs->add_element($brouter->generateURL('companies',array('view'=>'mycompany','company'=>$this->company->id)),$this->company->name);
 		$this->breadcrumbs->add_element('','Accounts',false);
-		$this->setTitle($this->company->name.' - financial accounts');
+		$this->setTitle(BLang::__('COMPFINANCES_ACCOUTNS_META_TITLE',['companyname'=>$this->company->name]));
+		$this->addMeta('description', BLang::__('COMPFINANCES_ACCOUTNS_META_DESC',['companyname'=>$this->company->name]));
+		$this->addMeta('keywords', BLang::__('COMPFINANCES_ACCOUTNS_META_KEYW',['companyname'=>$this->company->name]));
 		}
 	/**
 	 * Process the error & return the message.

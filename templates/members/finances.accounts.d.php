@@ -5,15 +5,18 @@
  * @author: Andrii Birev
  */
 defined('BEXEC') or die('No direct access!');
+use \Brilliant\CMS\BLang;
+
+$bRouter=\Application\BRouter::getInstance();
+$urlNewAccount=$bRouter->generateUrl('companies',array('view'=>'accountadd','lang'=>BLang::$langcode));
 ?>
 <div id="compfinances_accounts">
 	<div class="header">
 		<div class="form-group pull-right">
-			<a class="btn btn-info" href="#"><i class="fa fa-plus"></i> Test1</a>
-			<a class="btn btn-danger btn-delete disabled" href="#"><i class="fa fa-trash-o"></i> Test2</a>
+			<a class="btn btn-info" href="<?php echo $urlNewAccount; ?>"><i class="fa fa-plus"></i>&nbsp;<?php echo BLang::_('COMPFINANCES_ACCOUTNS_ADDBTN'); ?></a>
+			<a class="btn btn-danger btn-delete disabled" href="#"><i class="fa fa-trash-o"></i>&nbsp;<?php echo BLang::_('COMPFINANCES_ACCOUTNS_DELBTN'); ?></a>
 		</div>
-
-		<h1 class="page-header">Accounts of company "<?php echo htmlspecialchars($this->company->name); ?>"</h1>
+		<h1 class="page-header"><?php echo BLang::html('COMPFINANCES_ACCOUTNS_HEADER',['companyname'=>$this->company->name]); ?></h1>
 	</div>
 
 	<?php $this->breadcrumbs->draw(); ?>
@@ -47,6 +50,6 @@ defined('BEXEC') or die('No direct access!');
 			</table>
 		</div>
 	<?php else: ?>
-		Could not load accounts!
+		<div class="alert alert-warning">Could not load accounts! Please, create 1 or more financial accounts.</div>
 	<?php endif; ?>
 </div>

@@ -27,6 +27,13 @@ self::$strings=array(
 	'COMPFINANCES_ACCOUNT_PLEASESELECT'=>'- Please, select account -',
 	'COMPFINANCES_CATEGORY_PLEASESELECT'=>'- Please, select category -',
 
+	'COMPFINANCES_ACCOUTNS_ADDBTN' => 'Add account',
+	'COMPFINANCES_ACCOUTNS_DELBTN' => 'Delete account',
+	'COMPFINANCES_ACCOUTNS_HEADER' => 'Accounts of company "%companyname%"',
+	'COMPFINANCES_ACCOUTNS_META_TITLE' => '%companyname% - accounts of the company',
+	'COMPFINANCES_ACCOUTNS_META_DESC' => 'Accounts of company %companyname%, you could view, add or delete accounts here',
+	'COMPFINANCES_ACCOUTNS_META_KEYW' => 'Accounts, Company',
+
 	'PROJECTS_PROJECT_PLEASESELECT'=>'- Please, select project -',
 
 	'FINCURRENCY_USD_NAME'=>'United States Dollar',

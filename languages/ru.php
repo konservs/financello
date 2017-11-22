@@ -25,6 +25,13 @@ self::$strings=array(
 	'COMPFINANCES_OPGROUP_EDITBTN'=>'Редактировать',
 	'COMPFINANCES_OPGROUP_DELETEBTN'=>'Удалить',
 
+	'COMPFINANCES_ACCOUTNS_ADDBTN' => 'Добавить счёт',
+	'COMPFINANCES_ACCOUTNS_DELBTN' => 'Удалить счёт',
+	'COMPFINANCES_ACCOUTNS_HEADER' => 'Счета компании «%companyname%»',
+	'COMPFINANCES_ACCOUTNS_META_TITLE' => '%companyname% - счета компании',
+	'COMPFINANCES_ACCOUTNS_META_DESC' => 'Счета компании %companyname%, вы можете просматривать, добавлять или удалять счета тут',
+	'COMPFINANCES_ACCOUTNS_META_KEYW' => 'счета, компания',
+
 	'FINCURRENCY_USD_NAME'=>'Доллар США',
 	'FINCURRENCY_EUR_NAME'=>'Евро',
 	'FINCURRENCY_UAH_NAME'=>'Украинская гривна',
