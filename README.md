@@ -27,7 +27,10 @@ composer install
 
 **Step 3.** Create database and edit the configuration file.
 Configuration file is available at **config/config.php** path.
-
+```{r, engine='bash', code_block_name}
+vendor/bin/phinx migrate
+vendor/bin/phinx seed:run
+```
 
 
 ## Updating the code
