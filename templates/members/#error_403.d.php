@@ -19,7 +19,7 @@ $bhtml->load_css(dirname(__FILE__).DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR
 <html>
 <head>
 	<title><?php echo BLang::_("403_PAGE_NOT_FOUND"); ?></title>
-	<link rel=stylesheet href="<?php echo '//'.BHOSTNAME_STATIC.'/css/errors.css'; ?>" type="text/css" />
+	<link rel=stylesheet href="<?php echo URL_STATIC.'/css/errors.css'; ?>" type="text/css" />
 	<?php echo $bhtml->out_head();?>
 </head>
 
