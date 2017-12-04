@@ -12,7 +12,10 @@ class Frameworks{
 	public function useFramework($alias=''){
 		$this->list[$alias]=$alias;
 		if($alias=='jquery-ui'){
-			$this->list['jquery']='jquery';
+			$this->useFramework('jquery');
+			}
+		if($alias=='select2-finances-currencies'){
+			$this->useFramework('select2');
 			}
 		}
 	/**
@@ -30,9 +33,12 @@ class Frameworks{
 					$html->addCSS('//'.BHOSTNAME_STATIC.'/assets/bootstrap/css/bootstrap-theme.min.css','',CSS_PRIORITY_FRAMEWORK2);
 					break;
 				case 'select2': 
-					$html->addJS('//'.BHOSTNAME_STATIC.'/assets/select2/select2-built.js');
-					$html->addCSS('//'.BHOSTNAME_STATIC.'/assets/select2/select2-built.css');
-					break;					
+					$html->addJS('//'.BHOSTNAME_STATIC.'/assets/select2/select2-built.js','',JS_PRIORITY_FRAMEWORK2);
+					$html->addCSS('//'.BHOSTNAME_STATIC.'/assets/select2/select2-built.css','',CSS_PRIORITY_FRAMEWORK2);
+					break;
+				case 'select2-finances-currencies': 
+					$html->addJS('//'.BHOSTNAME_STATIC.'/js/select2_filters/fin_currencies.js');
+					break;
 				case 'font-awesome':
 					$html->addCSS('//'.BHOSTNAME_STATIC.'/assets/font-awesome/css/font-awesome.min.css','',CSS_PRIORITY_FRAMEWORK2);
 					break;
