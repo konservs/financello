@@ -22,7 +22,7 @@ if((defined('DEBUG_SITENOINDEX'))&&(DEBUG_SITENOINDEX)){
 	$bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
 	}
 $bhtml->useFramework('jquery');
-$bhtml->add_css('//'.BHOSTNAME_STATIC.'/css/main.css?v=1.5.4');
+$bhtml->addCSS('//'.BHOSTNAME_STATIC.'/css/main.css?v=1.5.4');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');

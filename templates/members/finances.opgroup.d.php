@@ -14,15 +14,15 @@ $js.='window.languages.SELECT2_PAYEE_PLACEHOLDER="Payee";';
 $js.='window.urls={};'.PHP_EOL;
 $js.='window.urls.select2payeefilter="/members/mycompany-1/payees/filter.json";';
 //
-$this->add_js('',$js);
+$this->addJS('',$js);
 //
-$this->add_js('/static/libs/select2/select2.min.js','',JS_PRIORITY_FRAMEWORK2);
-$this->add_js('/static/libs/select2/select2_locale_ru.js');
-$this->add_css('/static/libs/select2/select2.css');
-$this->add_css('/static/libs/select2/select2-bootstrap.css');
+$this->addJS('/static/libs/select2/select2.min.js','',JS_PRIORITY_FRAMEWORK2);
+$this->addJS('/static/libs/select2/select2_locale_ru.js');
+$this->addCSS('/static/libs/select2/select2.css');
+$this->addCSS('/static/libs/select2/select2-bootstrap.css');
 //
-$this->load_js(dirname(__FILE__).DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'compfinances.opgroup.d.js');
-$this->load_js(dirname(__FILE__).DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'select2.payees.js');
+$this->loadJS(dirname(__FILE__).DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'compfinances.opgroup.d.js');
+$this->loadJS(dirname(__FILE__).DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'select2.payees.js');
 ?>
 <div id="compfinances_opgroupadd">
 	<form role="form" method="POST" id="compfinances_opgroupadd_form">
