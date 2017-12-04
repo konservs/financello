@@ -1,4 +1,8 @@
 {
+	"config": {
+		"component-dir": "static/assets",
+		"component-baseurl": "/static/assets"
+		},
 	"autoload": {
 		"psr-4": {
 			"Brilliant\\": "framework/libraries/",
@@ -7,6 +11,10 @@
 		},
 	"require": {
 		"robmorgan/phinx": "^0.8.0",
-		"fzaninotto/faker": "^1.6"
+		"fzaninotto/faker": "^1.6",
+		"components/jquery": "*",
+		"components/bootstrap": "*",
+		"select2/select2": "*",
+		"robloach/component-installer": "*"
+		}
 	}
-}
