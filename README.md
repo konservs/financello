@@ -36,4 +36,6 @@ vendor/bin/phinx seed:run
 ## Updating the code
 ```{r, engine='bash', code_block_name}
 git submodule update --recursive --remote
+composer update
+vendor/bin/phinx migrate
 ```
