@@ -34,7 +34,7 @@ class Frameworks{
 					$html->add_css('//'.BHOSTNAME_STATIC.'/assets/select2/select2-built.css');
 					break;					
 				case 'font-awesome':
-					$html->add_css('//'.BHOSTNAME_STATIC.'/fonts/font-awesome/4.7.0/css/font-awesome.min.css','',CSS_PRIORITY_FRAMEWORK2);
+					$html->add_css('//'.BHOSTNAME_STATIC.'/assets/font-awesome/css/font-awesome.min.css','',CSS_PRIORITY_FRAMEWORK2);
 					break;
 				default:
 					BLog::addtolog('Unknown framework "'.$framework.'"');
