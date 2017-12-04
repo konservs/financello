@@ -12,8 +12,8 @@ class CurrenciesAddFields extends AbstractMigration{
 			->addColumn('name', 'char', ['length'=>50])
 			->addColumn('fractional', 'char', ['length'=>20])
 			->addColumn('symbol', 'char', ['length'=>5])
-			->addColumn('basic', 'integer', ['signed'=>false, 'default' => 100, 'limit' => MysqlAdapter::INT_TINY])
-			->addColumn('decimals', 'integer', ['signed'=>false, 'default' => 2, 'limit' => MysqlAdapter::INT_TINY])
+			->addColumn('basic', 'integer', ['signed'=>false, 'null'=>true, 'default' => 100, 'limit' => MysqlAdapter::INT_REGULAR])
+			->addColumn('decimals', 'integer', ['signed'=>false, 'null'=>true, 'default' => 2, 'limit' => MysqlAdapter::INT_TINY])
 			->addIndex(['code3'], ['unique' => true])
 			->update();
 		}
