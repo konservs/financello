@@ -14,7 +14,7 @@ $bhtml->add_meta('viewport','width=device-width, initial-scale=0.35, maximum-sca
 $brouter=BRouter::getInstance();
 $bhtml->useFramework('bootstrap');
 
-$bhtml->load_css(dirname(__FILE__).DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'#error_404.d.css');
+$bhtml->loadCSS(dirname(__FILE__).DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'#error_404.d.css');
 ?><!DOCTYPE html>
 <html>
 <head>

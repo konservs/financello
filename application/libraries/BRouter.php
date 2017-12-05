@@ -169,7 +169,10 @@ class BRouter extends BRouterBase{
 		if($view=='accountadd'){
 			return 'members/mycompany-'.$company.'/accounts/add';
 			}
-
+		//Currencies filter
+		if($view=='company_currencies_json'){
+			return 'members/mycompany-'.$company.'/currencies.json';
+			}
 		return false;
 		}
 	/**
@@ -348,6 +351,17 @@ class BRouter extends BRouterBase{
 			array_shift($f_path);
 			return $this->parseUrlMembersMyCompanyPayees($companyid,$f_path);
 			}
+		//Currencies filter
+		if(($f_path[0]=='currencies.json')&&($f_path_count==1)){
+			$this->rules[]=(object)array(
+				'com' => 'companies',
+				'position' => 'content',
+				'segments' => array('view'=>'currencies_json','company'=>$companyid),
+				);
+			$this->ctype = CTYPE_JSON;
+			return true;
+			}
+
 		//
 		if(($f_path[0]=='accounts')&&($f_path_count==1)){
 			$this->rules[]=(object)array(

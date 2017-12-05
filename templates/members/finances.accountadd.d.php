@@ -6,6 +6,12 @@
  */
 defined('BEXEC') or die('No direct access!');
 use \Brilliant\CMS\BLang;
+//
+$js='';
+$js.='window.urls={};'.PHP_EOL;
+$js.='window.urls.select2currenciesfilter="/members/mycompany-1/currencies.json";';
+$this->addJS('',$js);
+//
 $this->useFramework('select2');
 $this->useFramework('select2-finances-currencies');
 ?>
@@ -19,7 +25,7 @@ $this->useFramework('select2-finances-currencies');
 	<div class="panel-body row">
 		<div class="col-lg-3 col-md-12 col-sm-12 opgname form-group">
 			<label class="sr-only" for="<?php echo 'fincurrencieslist'; ?>">Currency</label>
-			<input type="hidden" id="<?php echo 'fincurrencieslist'; ?>" class="form-control input-sm select2 fincurrencieslist" name="opgroup_name" placeholder="Currency" value="<?php //echo $this->operation->payee; ?>"/>
+			<select id="<?php echo 'fincurrencieslist'; ?>" class="form-control input-sm select2fincurrencieslist" name="currency" placeholder="Currency"></select>
 		</div>
 	</div>
 
