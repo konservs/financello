@@ -23,6 +23,11 @@ class Currency extends BItemsItem {
 	function __construct() {
 		parent::__construct();
 		$this->fieldAddRaw('code3', 'str');
+		$this->fieldAddRaw('name', 'str');
+		$this->fieldAddRaw('fractional', 'str');
+		$this->fieldAddRaw('symbol', 'str');
+		$this->fieldAddRaw('basic', 'int');
+		$this->fieldAddRaw('decimals', 'int');
 	}
 
 	/**
@@ -32,6 +37,10 @@ class Currency extends BItemsItem {
 	 * @return string
 	 */
 	public function formatMoney($number) {
-		return sprintf('%2.2f', $number);
+		$decimals = $this->decimals;
+		if(empty($decimals)){
+			return sprintf('%d', $number);
+			}
+		return sprintf('%.'.$decimals.'f', $number);
 	}
 }
