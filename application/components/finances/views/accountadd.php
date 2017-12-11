@@ -19,6 +19,11 @@ class View_finances_accountadd extends \Brilliant\MVC\BView{
 		$this->breadcrumbs->add_element($brouter->generateURL('companies',array('view'=>'mycompany','company'=>$this->company->id)),$this->company->name);
 		$this->breadcrumbs->add_element($brouter->generateURL('finances',array('view'=>'accounts','company'=>$this->company->id)),'Accounts');
 		$this->breadcrumbs->add_element('','New account',false);
+
+		$this->setTitle(BLang::__('COMPFINANCES_ACCOUNT_ADD_META_TITLE',['companyname'=>$this->company->name]));
+		$this->addMeta('description', BLang::__('COMPFINANCES_ACCOUNT_ADD_META_DESC',['companyname'=>$this->company->name]));
+		$this->addMeta('keywords', BLang::__('COMPFINANCES_ACCOUNT_ADD_META_KEYW',['companyname'=>$this->company->name]));
+
 		}
 	/**
 	 * Process the error & return the message.

@@ -13,10 +13,10 @@ $urlNewAccount=$bRouter->generateUrl('finances',array('view'=>'accountadd', 'com
 <div id="compfinances_accounts">
 	<div class="header">
 		<div class="form-group pull-right">
-			<a class="btn btn-info" href="<?php echo $urlNewAccount; ?>"><i class="fa fa-plus"></i>&nbsp;<?php echo BLang::_('COMPFINANCES_ACCOUTNS_ADDBTN'); ?></a>
-			<a class="btn btn-danger btn-delete disabled" href="#"><i class="fa fa-trash-o"></i>&nbsp;<?php echo BLang::_('COMPFINANCES_ACCOUTNS_DELBTN'); ?></a>
+			<a class="btn btn-info" href="<?php echo $urlNewAccount; ?>"><i class="fa fa-plus"></i>&nbsp;<?php echo BLang::_('COMPFINANCES_ACCOUNTS_ADDBTN'); ?></a>
+			<a class="btn btn-danger btn-delete disabled" href="#"><i class="fa fa-trash-o"></i>&nbsp;<?php echo BLang::_('COMPFINANCES_ACCOUNTS_DELBTN'); ?></a>
 		</div>
-		<h1 class="page-header"><?php echo BLang::html('COMPFINANCES_ACCOUTNS_HEADER',['companyname'=>$this->company->name]); ?></h1>
+		<h1 class="page-header"><?php echo BLang::html('COMPFINANCES_ACCOUNTS_HEADER',['companyname'=>$this->company->name]); ?></h1>
 	</div>
 
 	<?php $this->breadcrumbs->draw(); ?>
@@ -50,6 +50,6 @@ $urlNewAccount=$bRouter->generateUrl('finances',array('view'=>'accountadd', 'com
 			</table>
 		</div>
 	<?php else: ?>
-		<div class="alert alert-warning"><?php echo BLang::__('COMPFINANCES_ACCOUTNS_EMPTYMESSAGE',['companyname'=>$this->company->name, 'addurl'=>$urlNewAccount]); ?></div>
+		<div class="alert alert-warning"><?php echo BLang::__('COMPFINANCES_ACCOUNTS_EMPTYMESSAGE',['companyname'=>$this->company->name, 'addurl'=>$urlNewAccount]); ?></div>
 	<?php endif; ?>
 </div>
