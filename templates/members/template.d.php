@@ -18,7 +18,7 @@ $bhtml=BHTML::getInstance();
 //	}
 //Add noindex for all pages...
 $bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
-$bhtml->addCSS(URL_STATIC.'/css/members.css?v=1.0.0');
+$bhtml->addCSS(URL_STATIC.'/css/members.css?v=1.0.1');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');

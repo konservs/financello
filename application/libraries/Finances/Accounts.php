@@ -19,7 +19,19 @@ class Accounts extends BItemsList {
 	use BSingleton;
 	protected $tableName = 'fin_accounts';
 	protected $itemClassName = '\Application\Finances\Account';
-
+	/**
+	 * 
+	 */
+	public static function listIcons(){
+		$list=[];
+		$list[]=(object)['id'=>'cash', 'name'=>'Cash', 'class'=>'fa fa-cash'];
+		$list[]=(object)['id'=>'сс-mastercard', 'name'=>'Mastercard', 'class'=>'fa fa-cc-mastercard'];
+		$list[]=(object)['id'=>'сс-visa', 'name'=>'Visa', 'class'=>'fa fa-cc-visa'];
+		$list[]=(object)['id'=>'paypal', 'name'=>'Paypal', 'class'=>'fa fa-paypal'];
+		$list[]=(object)['id'=>'credit-card', 'name'=>'Credit Card', 'class'=>'fa fa-credit-card'];
+		$list[]=(object)['id'=>'bitcoin', 'name'=>'Bitcoin', 'class'=>'fa fa-bitcoin'];
+		return $list;
+		}
 	/**
 	 * Items filter SQL - where, JOINs, etc
 	 *

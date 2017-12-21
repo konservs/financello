@@ -49,8 +49,8 @@ class View_finances_accountadd extends \Brilliant\MVC\BView{
 		if(empty($this->company)){
 			return 'Could not load company!';
 			}
-		//$this->accounts=$data->accounts;
-
+		$this->formErrors=$data->formErrors;
+		$this->formData=$data->formData;
 		$this->generate_breadcrumbs();
 		return $this->templateLoad();
 		}

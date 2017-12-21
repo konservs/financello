@@ -29,6 +29,7 @@ class CompanyModel extends BModel {
 	public function getData($segments) {
 		$data = new \stdClass();
 		$data->error = -1;
+		$data->formErrors = [];
 		$data->companyId = (int)$segments['company'];
 		//Check if me is logged...
 		$bUsers = BUsers::getInstance();
