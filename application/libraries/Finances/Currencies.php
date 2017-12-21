@@ -25,5 +25,12 @@ class Currencies extends \Brilliant\Items\BItemsList{
 		if(!empty($params['code3'])){
 			$wh[]='(`code3` = '.$db->escapeString($params['code3']).')';
 			}
+		if (!empty($params['keyword'])) {
+			$keyword = mb_strtolower($params['keyword'], 'UTF-8');
+			$keyword = trim($keyword);
+			$keyword = str_replace('’', '_', $keyword);
+			$keyword = str_replace('\'', '_', $keyword);
+			$wh[] = '((lower(`name`) like ' . $db->escapeString('%' . $keyword . '%') . ') OR (lower(`code3`) like ' . $db->escapeString('%' . $keyword . '%') . '))';
+			}
 		}
 	}

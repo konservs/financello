@@ -353,10 +353,15 @@ class BRouter extends BRouterBase{
 			}
 		//Currencies filter
 		if(($f_path[0]=='currencies.json')&&($f_path_count==1)){
+			$segments = array('view'=>'currencies_json','company'=>$companyid);
+			$keyword = \Brilliant\HTTP\BRequest::getString('q');
+			if($keyword){
+				$segments['keyword'] = $keyword;
+				}
 			$this->rules[]=(object)array(
 				'com' => 'companies',
 				'position' => 'content',
-				'segments' => array('view'=>'currencies_json','company'=>$companyid),
+				'segments' => $segments,
 				);
 			$this->ctype = CTYPE_JSON;
 			return true;

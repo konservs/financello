@@ -27,8 +27,15 @@ class Model_companies_currencies_json extends \Brilliant\MVC\BModelJSON{
 		$params = array();
 		$params['limit'] = $json->limit;
 		$params['offset'] = $json->offset;
+		if($segments['keyword']){
+			$params['keyword'] = $segments['keyword'];
+			}
 		//
 		$bcurr = Currencies::getInstance();
+		//
+		$count = $bcurr->itemsFilterCount($params);
+		$json->count = $count;
+		//
 		$list = $bcurr->itemsFilter($params);
 		foreach($list as $cur){
 			$xcur = new \stdClass();
