@@ -10,6 +10,7 @@ $bRouter=\Application\BRouter::getInstance();
 $urlCompany = $bRouter->generateURL('companies',array('view'=>'mycompany','lang'=>BLang::$langcode,'company'=>$this->company->id));
 $urlCompanyAccounts = $bRouter->generateURL('finances',array('view'=>'accounts','lang'=>BLang::$langcode,'company'=>$this->company->id));
 
+$mainCurrency = $this->company->getMainCurrency();
 
 ?>
 <div class="panel panel-default">
@@ -35,6 +36,7 @@ $urlCompanyAccounts = $bRouter->generateURL('finances',array('view'=>'accounts',
                             <div class="col-xs-9 text-right">
                                 <div class="huge"><b>$</b>&nbsp;26&nbsp;127</div>
                                 <div>Your money</div>
+				<?php echo $mainCurrency?$mainCurrency->code3:'-'; ?>
                             </div>
                         </div>
                     </div>

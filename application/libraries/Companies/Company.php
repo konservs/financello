@@ -8,6 +8,7 @@ namespace Application\Companies;
 
 use \Application\Companies\Companies;
 use \Application\Companies\CompanyUsers;
+use \Application\Finances\Currencies;
 use \Brilliant\Items\BItemsItem;
 
 class Company extends BItemsItem {
@@ -47,6 +48,7 @@ class Company extends BItemsItem {
 		$this->fieldAddRaw('published', 'enum', array('values' => array('P', 'N', 'D')));
 		$this->fieldAddRaw('name', 'string');
 		$this->fieldAddRaw('director', 'int');
+		$this->fieldAddRaw('maincurrency', 'int');
 		//Statistics (all fields are readonly)
 		$this->fieldAddRaw('counter_users', 'int', array('readonly' => true));
 		//Created & modified
@@ -71,5 +73,24 @@ class Company extends BItemsItem {
 			return false;
 		}
 		return $companyUser->getAccessFlag($flag);
+	}
+	/**
+	 * can user or not?
+	 *
+	 * @param $flag \Application\Finances\Currency
+	 * @return bool
+	 */
+	public function getMainCurrency() {
+		$bFinancesCurrencies = Currencies::getInstance();
+		if($this->maincurrency) {
+			$mainCurrency = $bFinancesCurrencies->itemGet($this->maincurrency);
+			return $mainCurrency;
+		}
+		$mainCurrencies = $bFinancesCurrencies->itemsFilter(['code3'=>'USD']);
+		if ((is_array($mainCurrencies)) && (count($mainCurrencies) == 1)) {
+			$mainCurrency = reset($mainCurrencies);
+			return $mainCurrency;
+		}
+		return NULL;
 	}
 }
