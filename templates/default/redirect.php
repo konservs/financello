@@ -5,6 +5,7 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
+use \Brilliant\CMS\BLang;
 ?>
 <div id="redirect">
 	<div class="container">

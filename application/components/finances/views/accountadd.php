@@ -46,6 +46,11 @@ class View_finances_accountadd extends \Brilliant\MVC\BView{
 		if($this->error>0){
 			return $this->process_error();
 			}
+		if($data->redirect){
+			$this->setLocation($data->redirect,0);
+			return $this->renderredirect();
+			}
+
 		if(empty($this->company)){
 			return 'Could not load company!';
 			}

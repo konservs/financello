@@ -10,6 +10,7 @@ use \Application\Companies\Companies;
 use \Application\Companies\CompanyModel;
 use \Application\Finances\Accounts;
 use \Application\Finances\Account;
+use \Brilliant\CMS\BLang;
 use \Brilliant\HTTP\BRequest;
 
 class Model_finances_accountadd extends CompanyModel {
@@ -45,10 +46,22 @@ class Model_finances_accountadd extends CompanyModel {
 			if(!$formOk){
 				return $data;
 				}
-			//die();
+
+			$acc = new Account();
+			$acc->company = $data->companyId;
+			//$acc->currency = 
+			$acc->name = $data->formData['name'];
+			//$acc->icon = 
+			//$acc->limit = 
+			$dbResult = $acc->saveToDB();
+			if(!$dbResult){
+				$data->error = 1;
+				return $data;
+				}
+			$data->error = 0;
+			$bRouter=\Application\BRouter::getInstance();
+			$data->redirect = $bRouter->generateUrl('finances',array('view'=>'accounts','company'=>$data->companyId,'lang'=>BLang::$langcode),array('usehostname'=>true));
 			}
-		//$bAccounts = Accounts::getInstance();
-		//$data->accounts = $bAccounts->itemsFilter(array('company' => $data->companyId));
 		$data->error = 0;
 		return $data;
 	}
