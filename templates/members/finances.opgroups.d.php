@@ -11,7 +11,7 @@ $brouter=\Application\BRouter::getInstance();
 <div id="compfinances_opgroups">
 	<div class="header">
 		<div class="form-group pull-right">
-			<a class="btn btn-info" href="<?php echo $brouter->generateUrl('compfinances',array('view'=>'opgroupadd','lang'=>BLang::$langcode,'company'=>$this->company->id)); ?>"><i class="fa fa-plus"></i> Add operation</a>
+			<a class="btn btn-info" href="<?php echo $brouter->generateUrl('finances',array('view'=>'opgroupadd','lang'=>BLang::$langcode,'company'=>$this->company->id)); ?>"><i class="fa fa-plus"></i> Add operation</a>
 			<!-- <a class="btn btn-danger btn-delete disabled" data-toggle="modal" data-target="#confirmDelete"><i class="fa fa-trash-o"></i> Delete</a> -->
 		</div>
 
@@ -64,6 +64,6 @@ $brouter=\Application\BRouter::getInstance();
 			</table>
 		</div>
 	<?php else: ?>
-		Could not load operation groups!
+		<div class="warning">Could not load finances operations list!</div>
 	<?php endif; ?>
 </div>

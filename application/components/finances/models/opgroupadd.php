@@ -1,49 +1,48 @@
 <?php
 /**
- * Model to load operation groups.
+ * Model of adding operation group single page.
  *
  * @author Andrii Biriev
  */
 defined('BEXEC') or die('No direct access!');
 
-class Model_finances_opgroupadd extends \Brilliant\MVC\BModel{
-	/**
-	 * Get data.
-	 */
-	public function getData($segments){
-		$data=new stdClass;
-		$data->error=-1;
-		$data->companyid=(int)$segments['company'];
-		$data->groupid=(int)$segments['id'];
-		//Check if me is logged...
-		$busers=BUsers::getInstance();
-		$data->me=$busers->getLoggedUser();
-		if(empty($data->me)){
-			$data->error=1;
-			return $data;
-			}
-		//
-		$bcompanies=BCompanies::getInstance();
-		$data->company=$bcompanies->company_get($data->companyid);
-		if(empty($data->company)){
-			$data->error=2;
-			return $data;
-			}
-		//Check if the user has access with this company.
-		//TODO: finish this code & library.
-		$data->can_view=true;//$data->company->canuser($data->me->id,FLAG_CAN_VIEW);
-		$data->can_edit=true;//$data->company->canuser($data->me->id,FLAG_CAN_EDIT);
-		//
-		$bcf=BCompFinances::getInstance();
-		$bp=BProjects::getInstance();
-		$data->categories=$bcf->categories_get_filter(array('company'=>$data->companyid));
-		$data->accounts=$bcf->accounts_get_filter(array('company'=>$data->companyid));
-		$data->projects=$bp->projects_get_filter(array('company'=>$data->companyid));
-		//
-		$data->opgroup=new BCompFinancesOpGroup();
-		$data->opgroup->operations=array();
+use \Application\Companies\Companies;
+use \Application\Finances\Accounts;
+use \Application\Finances\OperationGroup;
+use \Brilliant\CMS\BLang;
+use \Brilliant\HTTP\BRequest;
 
+class Model_finances_opgroupadd extends \Application\Companies\CompanyModel{
+	/**
+	 * Model_finances_opgroupadd constructor
+	 */
+	public function __construct(){
+		parent::__construct();
+		$this->permissionsFlagView = Companies::$flagCanViewCompany;
+		$this->permissionsFlagEdit = Companies::$flagCanEditCompany;
+		}
+
+	/**
+	 * Get data for accounts
+	 *
+	 * @param $segments
+	 * @return stdClass
+	 */
+	public function getData($segments) {
+		$data = parent::getData($segments);
+		if ($data->error != 0) {
+			return $data;
+			}
+		//
+		$bfa=\Application\Finances\Accounts::getInstance();
+		//$data->categories=$bcf->categories_get_filter(array('company'=>$data->companyId));
+		$data->accounts=$bfa->getSimpleList(array('name'),array(),'',array('company'=>$data->companyId));
+		//$data->projects=$bp->projects_get_filter(array('company'=>$data->companyId));
+		//
+		$data->opgroup=new \Application\Finances\OperationGroup();
+		$data->opgroup->operations=array();
 		//$data->projects=$bp->;
+		//$bp=BProjects::getInstance();
 		//
 		$data->do=BRequest::getString('do');
 		$data->saving=($data->do=='save');

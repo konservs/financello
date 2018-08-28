@@ -5,6 +5,7 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
+use \Brilliant\CMS\BLang;
 
 $fields=array();
 if(empty($this->operation)){

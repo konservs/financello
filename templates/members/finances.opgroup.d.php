@@ -5,6 +5,8 @@
  * @author: Andrii Birev
  */
 defined('BEXEC')or die('No direct access!');
+use \Brilliant\CMS\BLang;
+
 $js='';
 $js.='window.accounts=[]';
 
@@ -51,7 +53,7 @@ $this->loadJS(dirname(__FILE__).DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'se
 		<div id="opgoperations">
 			<?php foreach($this->opgroup->operations as $operation): ?>
 				<?php $this->operation=$operation; ?>
-				<?php echo $this->template_load('operation'); ?>
+				<?php echo $this->templateLoad('operation'); ?>
 				<?php $this->index++; ?>
 			<?php endforeach; ?>
 		</div>
@@ -63,5 +65,5 @@ $this->loadJS(dirname(__FILE__).DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'se
 	</form>
 
 	<?php $this->operation=NULL; ?>
-	<?php echo $this->template_load('operation'); ?>
+	<?php echo $this->templateLoad('operation'); ?>
 </div>
