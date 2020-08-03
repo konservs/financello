@@ -2,6 +2,7 @@
 /config/config.php
 /filecache/*.dat
 /.idea
+/.backup
 /composer.lock
 /static/css/main_users_register.css
 /static/assets

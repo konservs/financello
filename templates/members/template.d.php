@@ -18,7 +18,7 @@ $bhtml=BHTML::getInstance();
 //	}
 //Add noindex for all pages...
 $bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
-$bhtml->addCSS(URL_STATIC.'/css/members.css?v=1.0.1');
+$bhtml->addCSS(URL_STATIC.'/css/members.css?v=1.0.2');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 $bhtml->add_meta('','IE=edge','X-UA-Compatible');
 $bhtml->add_meta('viewport','width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no');
@@ -30,9 +30,10 @@ $bhtml->useFramework('jquery');
 <?php $bhtml->out_head();?>
 </head>
 <body lang="<?php echo(BLang::$langcode_web) ?>" itemscope itemtype="http://schema.org/WebPage">
-	<div id="footer-pusher">
+    <main role="main" class="">
 	        <!-- TOP navigation bar -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+
+		<nav class="navbar navbar-inverse navbar-fixed-top  navbar-expand-sm navbar-dark bg-dark">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -63,7 +64,13 @@ $bhtml->useFramework('jquery');
 			</div>
 		</div>
 
-		<div class="push"></div>
-	</div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
+
+
 </body>
 </html>
