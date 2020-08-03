@@ -2,7 +2,7 @@
 /**
  * Index file of domain/subdomain
  * 
- * @author Andrii Biriev
+ * @author Andrii Biriev, <a@konservs.com>
  * 
  * @copyright © Andrii Biriev, <a@konservs.com>
  */
