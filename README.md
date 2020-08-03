@@ -17,7 +17,6 @@ Currenly I had not developed installation script and you need to perform 4 simpl
 **Step 1.** Let's clone the latest code from the reposithory
 ```{r, engine='bash', code_block_name}
 git clone https://github.com/konservs/financello.git ./
-git submodule update --recursive --remote
 ```
 
 **Step 2.** Install required frameworks using composer
@@ -35,7 +34,6 @@ vendor/bin/phinx seed:run
 
 ## Updating the code
 ```{r, engine='bash', code_block_name}
-git submodule update --recursive --remote
 composer update
 vendor/bin/phinx migrate
 ```
