@@ -1,6 +1,12 @@
 <?php
+/**
+ * Breadcrumbs - list
+ * 
+ * @author Andrii Biriev
+ */
 defined('BEXEC')or die('No direct access!');
 
+echo('<nav aria-label="breadcrumb">');
 echo('<ol class="breadcrumb">');
 foreach($this->elements as $element){
 	$icon='';
@@ -8,10 +14,10 @@ foreach($this->elements as $element){
 		$icon='<span class="fa '.$element->class.'"></span> ';
 		}
 	if($element->active){
-		echo('<li><a href="'.$element->url.'">'.$icon.htmlspecialchars($element->name).'</a></li>');
+		echo('<li class="breadcrumb-item"><a href="'.$element->url.'">'.$icon.htmlspecialchars($element->name).'</a></li>');
 		}
 	else{
-		echo('<li class="active">'.$icon.htmlspecialchars($element->name).'</li>');
+		echo('<li class="breadcrumb-item active" aria-current="page">'.$icon.htmlspecialchars($element->name).'</li>');
 		}
 	}
-echo('</ol>');
+echo('</ol></nav>');

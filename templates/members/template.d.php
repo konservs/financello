@@ -58,7 +58,7 @@ $bhtml->useFramework('jquery');
 				<div class="col-sm-3 col-md-2 sidebar">
 					{{position:sidebar}}
 				</div>
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main pt-3 px-4">
 					<div id="content">{{position:content}}</div>
 				</div>
 			</div>
