@@ -12,9 +12,17 @@ class Telegram {
 	protected $apiURL='https://api.telegram.org/';
 	protected $itemClassName='\Application\Finances\Category';
 
-	public $botAPIKey; #1305627909:AAEZNdNdIizP9y4PNIwGPYJwGKCC0SRyrLo/getMe';
+	public $botAPIKey; #
 	public $botUserName; #
 
+	/**
+	 * Constructor - init fields...
+	 */
+	function __construct() {
+		parent::__construct();
+		$this->botAPIKey = TELEGRAM_API_KEY;
+		$this->botUserName = TELEGRAM_BOT_USERNAME;
+		}
 
 	//Some flags
 	public static $flagCanSetWebhook = 'telegramSetWebHook';
@@ -32,9 +40,7 @@ class Telegram {
 		$res[] = self::$flagCanViewCurrencies;
 		$res[] = self::$flagCanEditCurrencies;
 		return $res;
-	}
-
-
+		}
 
 	public function getMe() {
 		$api_url = $apiURL.'bot'.$this->botAPIKey.'/getMe'
