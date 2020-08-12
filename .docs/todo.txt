@@ -1,0 +1,3 @@
+ - Add stocks. Example:
+   ru.investing.com/equities/tesla-motors
+ - Add telegram bot
