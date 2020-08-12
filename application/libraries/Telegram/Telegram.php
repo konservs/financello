@@ -15,6 +15,27 @@ class Telegram {
 	public $botAPIKey; #1305627909:AAEZNdNdIizP9y4PNIwGPYJwGKCC0SRyrLo/getMe';
 	public $botUserName; #
 
+
+	//Some flags
+	public static $flagCanSetWebhook = 'telegramSetWebHook';
+	/**
+	 * Get all access flags
+	 *
+	 * @return string[]
+	 */
+	public static function getAllFlags() {
+		$res = array();
+		$res[] = self::$flagCanViewCompany;
+		$res[] = self::$flagCanEditCompany;
+		$res[] = self::$flagCanViewAccounts;
+		$res[] = self::$flagCanEditAccounts;
+		$res[] = self::$flagCanViewCurrencies;
+		$res[] = self::$flagCanEditCurrencies;
+		return $res;
+	}
+
+
+
 	public function getMe() {
 		$api_url = $apiURL.'bot'.$this->botAPIKey.'/getMe'
 		}
