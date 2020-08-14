@@ -140,6 +140,21 @@ class BRouter extends BRouterBase{
 		return '';
 		}
 	/**
+	 * Generate url for Telegram component
+	 *
+	 * @param $lang
+	 * @param $segments
+	 * @return string
+	 */
+	public function generateUrlTelegram($lang, $segments){
+		$URL_telegram='telegram/';
+		$view=isset($segments['view'])?$segments['view']:'';
+		if(($view=='setwebhook')||($view=='hook')) {
+			return $URL_telegram.$view;
+			}
+		return '';
+		}
+	/**
 	 * Generate URL for company finances.
 	 */
 	public function generateUrlFinances($lang, $segments){
@@ -219,6 +234,8 @@ class BRouter extends BRouterBase{
 				return $pref.$this->generateUrlContent($lang,$segments);
 			case 'users':
 				return $pref.$this->generateUrlUsers($lang,$segments);
+			case 'telegram':
+				return $pref.$this->generateUrlTelegram($lang,$segments);
 			case 'companies':
 				return $pref.$this->generateUrlCompanies($lang,$segments);
 			case 'finances':

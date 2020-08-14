@@ -26,20 +26,22 @@ class Model_telegram_setwebhook extends \Brilliant\MVC\BModel{
 		$data->error = -1;
 		$data->formErrors = [];
 		//Check if me is logged...
-		$bUsers = BUsers::getInstance();
+		$bUsers = \Brilliant\Users\BUsers::getInstance();
 		$data->me = $bUsers->getLoggedUser();
 		if (empty($data->me)) {
 			$data->error = 1;
 			return $data;
 			}
 		//Check if the user has access with this company.
-		//$data->canView = (empty($this->permissionsFlagView)) || ($data->company->canUser($data->me->id, $this->permissionsFlagView));
-		//$data->canEdit = (empty($this->permissionsFlagView)) || ($data->company->canUser($data->me->id, $this->permissionsFlagEdit));
-
-		if ((!$data->canView) && (!$data->canEdit)) {
+		$data->canSet = ($data->me->id==1);//(empty($this->permissionsFlagSetWebhook)) || ($data->me->can($this->permissionsFlagSetWebhook));
+		if (!$data->canSet) {
 			$data->error = 403;
 			return $data;
 			}
+		$tg = \Application\Telegram\Telegram::getInstance();
+		$r = $tg->setHook();
+		$data->set_hook_result = $r;
+
 		$data->error = 0;
 		return $data;
 		}

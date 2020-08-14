@@ -1,6 +1,8 @@
 <?php
 namespace Application\Telegram;
 
+use \Brilliant\Log\BLog;
+
 /**
  * Basic class to control telegram bot
  *
@@ -19,7 +21,6 @@ class Telegram {
 	 * Constructor - init fields...
 	 */
 	function __construct() {
-		parent::__construct();
 		$this->botAPIKey = TELEGRAM_API_KEY;
 		$this->botUserName = TELEGRAM_BOT_USERNAME;
 		}
@@ -33,12 +34,7 @@ class Telegram {
 	 */
 	public static function getAllFlags() {
 		$res = array();
-		$res[] = self::$flagCanViewCompany;
-		$res[] = self::$flagCanEditCompany;
-		$res[] = self::$flagCanViewAccounts;
-		$res[] = self::$flagCanEditAccounts;
-		$res[] = self::$flagCanViewCurrencies;
-		$res[] = self::$flagCanEditCurrencies;
+		$res[] = self::$flagCanSetWebHook;
 		return $res;
 		}
 
@@ -48,18 +44,28 @@ class Telegram {
 
 	public function setHook() {
 		$hook_url = '';
+		$brouter=\Application\BRouter::GetInstance();
+		$hook_url=$brouter->generateURL('telegram',array('view'=>'hook'),['usehostname'=>1]);
+		if(empty($hook_url)){
+			BLog::addtolog('[Telegram]: Hook URL is empty!');
+			return 1;
+			}
+		$hook_url = $protocol.$hook_url;
 
+		BLog::addtolog('[Telegram]: Hook URL: '.$hook_url);
 		try {
 			// Create Telegram API object
-			$telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
+			$telegram = new \Longman\TelegramBot\Telegram($this->botAPIKey, $this->botUserName);
 			// Set webhook
 			$result = $telegram->setWebhook($hook_url);
 			if ($result->isOk()) {
-				echo $result->getDescription();
+				return 0;
 				}
-			} catch (Longman\TelegramBot\Exception\TelegramException $e) {
+			return -1;
+			}
+		catch (\Longman\TelegramBot\Exception\TelegramException $e) {
 			// log telegram errors
-			// echo $e->getMessage();
+			BLog::addtolog('[Telegram]: SetWebHookError: '.$e->getMessage(),LL_ERROR);
 			}
 		}
 	}

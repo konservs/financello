@@ -30,6 +30,10 @@ class Account extends BItemsItem {
 		$this->fieldAddRaw('currency', 'int');
 		$this->fieldAddRaw('name', 'string');
 		$this->fieldAddRaw('icon', 'string');
+		//Moneybox
+		$this->fieldAddRaw('moneybox', 'enum', array('values' => array('N','T','D','W','M')));
+		$this->fieldAddRaw('moneybox_round', 'int');
+		$this->fieldAddRaw('moneybox_account', 'int');
 		//Statistics (all fields are readonly)
 		$this->fieldAddRaw('limit', 'float');
 		$this->fieldAddRaw('balance', 'float', array('readonly' => true));
