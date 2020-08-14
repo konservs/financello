@@ -45,7 +45,7 @@ class Telegram {
 	public function setHook() {
 		$hook_url = '';
 		$brouter=\Application\BRouter::GetInstance();
-		$hook_url=$brouter->generateURL('telegram',array('view'=>'hook'),['usehostname'=>1]);
+		$hook_url=$brouter->generateURL('telegram',array('view'=>'hook'),['usehostname'=>1, 'protocol'=>'https://']);
 		if(empty($hook_url)){
 			BLog::addtolog('[Telegram]: Hook URL is empty!');
 			return 1;
