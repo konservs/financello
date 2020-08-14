@@ -268,6 +268,33 @@ class BRouter extends BRouterBase{
 		return false;
 		}
 	/**
+	 * Parse /telegram/ branch.
+	 * 
+	 * Language - $this->langcode
+	 */
+	public function parseUrlTelegram($f_path){
+		BLog::addtolog('[Router]: We are in telegam branch now!');
+		//Unset the latest empty "/" in url.
+		if((count($f_path))&&(empty($f_path[count($f_path)-1]))){
+			BLog::addtolog('[Router]: parseUrlTelegram() removing latest "/" character.');
+			unset($f_path[count($f_path)-1]);
+			}
+		//
+		if((count($f_path)==1)&&(($f_path[0]=='setwebhook')||($f_path[0]=='hook'))){
+			$this->maincom=(object)array(
+				'com'=>'telegram',
+				'position'=>'content',
+				'segments'=>array('view'=>$f_path[0]),
+				);
+			$this->rules[]=$this->maincom;
+			$this->addFixedRules();
+			return true;
+			}
+		BLog::addtolog('[Router]: parseUrlTelegram() no rules! $f_path='.var_export($f_path,true),LL_ERROR);
+		return false;
+		}
+
+	/**
 	 *
 	 */
 	public function parseUrlMembersMyCompanyPayees($companyid,$f_path){
@@ -535,6 +562,10 @@ class BRouter extends BRouterBase{
 		elseif($f_path[0]=='users'){
 			array_shift($f_path);
 			return $this->parseUrlUsers($f_path);
+			}
+		elseif($f_path[0]=='telegram'){
+			array_shift($f_path);
+			return $this->parseUrlTelegram($f_path);
 			}
 		if($f_path[0]=='members'){
 			array_shift($f_path);

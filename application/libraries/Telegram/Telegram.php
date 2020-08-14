@@ -43,7 +43,7 @@ class Telegram {
 		}
 
 	public function getMe() {
-		$api_url = $apiURL.'bot'.$this->botAPIKey.'/getMe'
+		$api_url = $this->apiURL.'bot'.$this->botAPIKey.'/getMe';
 		}
 
 	public function setHook() {
@@ -57,8 +57,7 @@ class Telegram {
 			if ($result->isOk()) {
 				echo $result->getDescription();
 				}
-			}
-		catch (Longman\TelegramBot\Exception\TelegramException $e) {
+			} catch (Longman\TelegramBot\Exception\TelegramException $e) {
 			// log telegram errors
 			// echo $e->getMessage();
 			}
