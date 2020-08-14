@@ -32,6 +32,6 @@ use Application\BRouter;
 $router=Application\BRouter::getInstance();
 if(DEBUG_MODE){
 	$router->htmllogger=new \Brilliant\Log\BLoggerHTML();
-	\Brilliant\log\BLog::RegisterLogger($router->htmllogger);
+	\Brilliant\Log\BLog::RegisterLogger($router->htmllogger);
 	}
 $router->run($_SERVER['REQUEST_URI'],$_SERVER['HTTP_HOST']);
