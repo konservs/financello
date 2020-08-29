@@ -15,6 +15,10 @@ class View_telegram_hook extends \Brilliant\MVC\BView {
 			$this->setStatus(403);
 			return $this->templateLoad('#error_403', true);
 			}
+		if ($data->error == 400) {
+			$this->setStatus(400);
+			return 'Error: #' . $data->error.'. Bad request.';
+			}
 		if ($data->error == 1) {
 			$this->setStatus(500);
 			return 'Error: #' . $data->error.'. User not authorized. Please, log in.';

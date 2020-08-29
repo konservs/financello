@@ -18,7 +18,7 @@ class Model_telegram_hook extends \Brilliant\MVC\BModel{
 		$data = new \stdClass();
 		$data->error = -1;
 		$tg = \Application\Telegram\Telegram::getInstance();
-		$data->error = 0;
+		$data->error = $tg->hook();
 		return $data;
 		}
 	}
